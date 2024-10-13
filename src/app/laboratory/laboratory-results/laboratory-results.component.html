@@ -1,0 +1,47 @@
+<h2 class="title">Laboratory Summary</h2>
+
+@if (selectedItems.length > 0) {
+<div>
+  <table class="results-table">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Cost (EURO)</th>
+        <th>Doctor Time (Min)</th>
+        <th>Patient Time (Min)</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+    @for (item of selectedItems; track item.code) {
+      <tr>
+        <td>{{ item.item }}</td>
+        <td>{{ item.behandlungskosten | currency: 'EUR': 'symbol':'1.2-2' }}</td>
+        <td>{{ item.aerztlicheArbeitszeit }} Min</td>
+        <td>{{ item.behandlungszeit }} Min</td>
+        <td>
+          @if ( item.results && item.results.length > 0) {
+          <ul>
+            @for (result of item.results; track $index) {
+            <li>{{ result }}</li>
+            }
+          </ul>
+        }
+        </td>
+      </tr>
+    }
+    </tbody>
+  </table>
+
+  <div class="totals">
+    <h3>Total Cost: <span>{{ getTotalCost() | currency: 'EUR': 'symbol':'1.2-2' }}</span></h3>
+    <h3>Total Doctor Time: <span>{{ getTotalDoctorTime() }} Min</span></h3>
+    <h3>Total Patient Time: <span>{{ getTotalPatientTime() }} Min</span></h3>
+  </div>
+</div>
+} @else { 
+<ng-template #noSelection>
+  <p class="no-selection">No selections made.</p>
+</ng-template>
+}
+<button routerLink="/laboratory-diagnosis" class="back-button">Make First Diagnosis</button>

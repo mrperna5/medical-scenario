@@ -1,0 +1,11 @@
+<h2>Make Your Diagnosis Guesses</h2>
+
+<form (ngSubmit)="onSubmit()">
+    @for (guess of laboratoryDiagnosisGuesses; track $index) {
+  <div class="form-group">
+    <label for="diagnosis-{{$index}}">Diagnosis Guess {{$index + 1}}</label>
+    <input id="diagnosis-{{$index}}" type="text" [(ngModel)]="laboratoryDiagnosisGuesses[$index]" name="guess-{{$index}}" class="form-control"/>
+  </div>
+    }
+  <button type="submit" class="submit-button">Submit Diagnosis</button>
+</form>
