@@ -15,14 +15,25 @@ export class SummaryComponent {
   selectedExaminations: MedicalOption[] = [];
   selectedLaboratories: MedicalOption[] = [];
   selectedFollowUps: MedicalOption[] = [];
+  
+  medicalHistoryDiagnosisGuesses: string[] = [];
+  examinationDiagnosisGuesses: string[] = [];
+  laboratoryDiagnosisGuesses: string[] = [];
+  followUpDiagnosisGuesses: string[] = [];
 
   constructor(private scenarioService: ScenarioService) {}
 
   ngOnInit(): void {
+    // Retrieve the selected items and diagnosis guesses for each section
     this.selectedMedicalHistories = this.scenarioService.getSelectedHistories();
     this.selectedExaminations = this.scenarioService.getSelectedExaminations();
     this.selectedLaboratories = this.scenarioService.getSelectedLaboratories();
     this.selectedFollowUps = this.scenarioService.getSelectedFollowUps();
+
+    this.medicalHistoryDiagnosisGuesses = this.scenarioService.getMedicalHistoryDiagnosisGuesses();
+    this.examinationDiagnosisGuesses = this.scenarioService.getExaminationDiagnosisGuesses();
+    this.laboratoryDiagnosisGuesses = this.scenarioService.getLaboratoryDiagnosisGuesses();
+    this.followUpDiagnosisGuesses = this.scenarioService.getFollowUpsDiagnosisGuesses();
   }
 
   // Calculate total cost for a given set of medical options
