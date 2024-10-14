@@ -10,17 +10,29 @@ import { followups } from './data/follow-ups';
 })
 export class ScenarioService {
 
-  private selectedMedicalHistories: MedicalOption[] = [];  // To store selected items
-  private medicalHistoryDiagnosisGuesses: string[] = []; // To store the five guesses
+  // private selectedMedicalHistories: MedicalOption[] = [];  // To store selected items
+  // private medicalHistoryDiagnosisGuesses: string[] = []; // To store the five guesses
 
-  private selectExaminations: MedicalOption[] = [];  // To store selected items
-  private examinationDiagnosisGuesses: string[] = []; // To store the five guesses
+  // private selectExaminations: MedicalOption[] = [];  // To store selected items
+  // private examinationDiagnosisGuesses: string[] = []; // To store the five guesses
 
-  private selectLaboratories: MedicalOption[] = [];  // To store selected items
-  private laboratoryDiagnosisGuesses: string[] = []; // To store the five guesses
+  // private selectLaboratories: MedicalOption[] = [];  // To store selected items
+  // private laboratoryDiagnosisGuesses: string[] = []; // To store the five guesses
 
-  private selectFollowUps: MedicalOption[] = [];  // To store selected items
-  private followUpDiagnosisGuesses: string[] = []; // To store the five guesses
+  // private selectFollowUps: MedicalOption[] = [];  // To store selected items
+  // private followUpDiagnosisGuesses: string[] = []; // To store the five guesses
+
+  private selectedMedicalHistoriesKey = 'selectedMedicalHistories';
+  private medicalHistoryDiagnosisGuessesKey = 'medicalHistoryDiagnosisGuesses';
+
+  private selectedExaminationsKey = 'selectedExaminations';
+  private examinationDiagnosisGuessesKey = 'examinationDiagnosisGuesses';
+
+  private selectedLaboratoriesKey = 'selectedLaboratories';
+  private laboratoryDiagnosisGuessesKey = 'laboratoryDiagnosisGuesses';
+
+  private selectedFollowUpsKey = 'selectedFollowUps';
+  private followUpDiagnosisGuessesKey = 'followUpDiagnosisGuesses';
 
   constructor() { }
 
@@ -32,22 +44,28 @@ export class ScenarioService {
 
   // Save selected items after form submission
   saveSelectedHistories(selectedItems: MedicalOption[]): void {
-    this.selectedMedicalHistories = [...selectedItems];
+    // this.selectedMedicalHistories = [...selectedItems];
+    localStorage.setItem(this.selectedMedicalHistoriesKey, JSON.stringify(selectedItems));
   }
 
   // Get selected items for review
   getSelectedHistories(): MedicalOption[] {
-    return this.selectedMedicalHistories;
+    // return this.selectedMedicalHistories;
+    const data = localStorage.getItem(this.selectedMedicalHistoriesKey);
+    return data ? JSON.parse(data) : [];
   }
 
   // Method to save medical history diagnostic guesses
   saveMedicalHistoryDiagnosisGuesses(guesses: string[]): void {
-    this.medicalHistoryDiagnosisGuesses = [...guesses];
+    // this.medicalHistoryDiagnosisGuesses = [...guesses];
+    localStorage.setItem(this.medicalHistoryDiagnosisGuessesKey, JSON.stringify(guesses));
   }
 
   // Get the medical history diagnosis guesses
   getMedicalHistoryDiagnosisGuesses(): string[] {
-    return this.medicalHistoryDiagnosisGuesses;
+    // return this.medicalHistoryDiagnosisGuesses;
+    const data = localStorage.getItem(this.medicalHistoryDiagnosisGuessesKey);
+    return data ? JSON.parse(data) : [];
   }
 
 
@@ -59,22 +77,24 @@ export class ScenarioService {
 
   // Save selected items after form submission
   saveSelectedExaminations(selectedItems: MedicalOption[]): void {
-    this.selectExaminations = [...selectedItems];
+    localStorage.setItem(this.selectedExaminationsKey, JSON.stringify(selectedItems));
   }
 
   // Get selected items for review
   getSelectedExaminations(): MedicalOption[] {
-    return this.selectExaminations;
+    const data = localStorage.getItem(this.selectedExaminationsKey);
+    return data ? JSON.parse(data) : [];
   }
 
   // Method to save medical history diagnostic guesses
   saveExaminationDiagnosisGuesses(guesses: string[]): void {
-    this.examinationDiagnosisGuesses = [...guesses];
+    localStorage.setItem(this.examinationDiagnosisGuessesKey, JSON.stringify(guesses));
   }
 
   // Get the medical history diagnosis guesses
   getExaminationDiagnosisGuesses(): string[] {
-    return this.examinationDiagnosisGuesses;
+    const data = localStorage.getItem(this.examinationDiagnosisGuessesKey);
+    return data ? JSON.parse(data) : [];
   }
 
 
@@ -86,22 +106,24 @@ export class ScenarioService {
 
   // Save selected items after form submission
   saveSelectedLaboratories(selectedItems: MedicalOption[]): void {
-    this.selectLaboratories = [...selectedItems];
+    localStorage.setItem(this.selectedLaboratoriesKey, JSON.stringify(selectedItems));
   }
 
   // Get selected items for review
   getSelectedLaboratories(): MedicalOption[] {
-    return this.selectLaboratories;
+    const data = localStorage.getItem(this.selectedLaboratoriesKey);
+    return data ? JSON.parse(data) : [];
   }
 
   // Method to save medical history diagnostic guesses
   saveLaboratoryDiagnosisGuesses(guesses: string[]): void {
-    this.laboratoryDiagnosisGuesses = [...guesses];
+    localStorage.setItem(this.laboratoryDiagnosisGuessesKey, JSON.stringify(guesses));
   }
 
   // Get the medical history diagnosis guesses
   getLaboratoryDiagnosisGuesses(): string[] {
-    return this.laboratoryDiagnosisGuesses;
+    const data = localStorage.getItem(this.laboratoryDiagnosisGuessesKey);
+    return data ? JSON.parse(data) : [];
   }
 
 
@@ -113,52 +135,54 @@ export class ScenarioService {
 
   // Save selected items after form submission
   saveSelectedFollowUps(selectedItems: MedicalOption[]): void {
-    this.selectFollowUps = [...selectedItems];
+    localStorage.setItem(this.selectedFollowUpsKey, JSON.stringify(selectedItems));
   }
 
   // Get selected items for review
   getSelectedFollowUps(): MedicalOption[] {
-    return this.selectFollowUps;
+    const data = localStorage.getItem(this.selectedFollowUpsKey);
+    return data ? JSON.parse(data) : [];
   }
 
   // Method to save medical history diagnostic guesses
   saveFollowUpsDiagnosisGuesses(guesses: string[]): void {
-    this.followUpDiagnosisGuesses = [...guesses];
+    localStorage.setItem(this.followUpDiagnosisGuessesKey, JSON.stringify(guesses));
   }
 
   // Get the medical history diagnosis guesses
   getFollowUpsDiagnosisGuesses(): string[] {
-    return this.followUpDiagnosisGuesses;
+    const data = localStorage.getItem(this.followUpDiagnosisGuessesKey);
+    return data ? JSON.parse(data) : [];
   }
 
 
   /* Summary Methods */
   // Calculate the total cost of all selected items
   getTotalCost(): number {
-    let medicalHistoryCost = this.selectedMedicalHistories.reduce((sum, item) => sum + item.behandlungskosten, 0);
-    let examinationCost = this.selectExaminations.reduce((sum, item) => sum + item.behandlungskosten, 0);
-    let laboratoryCost = this.selectLaboratories.reduce((sum, item) => sum + item.behandlungskosten, 0);
-    let followUpCost = this.selectFollowUps.reduce((sum, item) => sum + item.behandlungskosten, 0);
+    let medicalHistoryCost = this.getSelectedHistories().reduce((sum, item) => sum + item.behandlungskosten, 0);
+    let examinationCost = this.getSelectedExaminations().reduce((sum, item) => sum + item.behandlungskosten, 0);
+    let laboratoryCost = this.getSelectedLaboratories().reduce((sum, item) => sum + item.behandlungskosten, 0);
+    let followUpCost = this.getSelectedFollowUps().reduce((sum, item) => sum + item.behandlungskosten, 0);
 
     return medicalHistoryCost + examinationCost + laboratoryCost + followUpCost;
   }
 
   // Calculate the total doctor's time for all selected items
   getTotalDoctorTime(): number {
-    let medicalHistoryTime = this.selectedMedicalHistories.reduce((sum, item) => sum + item.aerztlicheArbeitszeit, 0);
-    let examinationTime = this.selectExaminations.reduce((sum, item) => sum + item.aerztlicheArbeitszeit, 0);
-    let laboratoryTime = this.selectLaboratories.reduce((sum, item) => sum + item.aerztlicheArbeitszeit, 0);
-    let followUpTime = this.selectFollowUps.reduce((sum, item) => sum + item.aerztlicheArbeitszeit, 0);
+    let medicalHistoryTime = this.getSelectedHistories().reduce((sum, item) => sum + item.aerztlicheArbeitszeit, 0);
+    let examinationTime = this.getSelectedExaminations().reduce((sum, item) => sum + item.aerztlicheArbeitszeit, 0);
+    let laboratoryTime = this.getSelectedLaboratories().reduce((sum, item) => sum + item.aerztlicheArbeitszeit, 0);
+    let followUpTime = this.getSelectedFollowUps().reduce((sum, item) => sum + item.aerztlicheArbeitszeit, 0);
 
     return medicalHistoryTime + examinationTime + laboratoryTime + followUpTime;
   }
 
   // Calculate the total patient's time for all selected items
   getTotalPatientTime(): number {
-    let medicalHistoryTime = this.selectedMedicalHistories.reduce((sum, item) => sum + item.behandlungszeit, 0);
-    let examinationTime = this.selectExaminations.reduce((sum, item) => sum + item.behandlungszeit, 0);
-    let laboratoryTime = this.selectLaboratories.reduce((sum, item) => sum + item.behandlungszeit, 0);
-    let followUpTime = this.selectFollowUps.reduce((sum, item) => sum + item.behandlungszeit, 0);
+    let medicalHistoryTime = this.getSelectedHistories().reduce((sum, item) => sum + item.behandlungszeit, 0);
+    let examinationTime = this.getSelectedExaminations().reduce((sum, item) => sum + item.behandlungszeit, 0);
+    let laboratoryTime = this.getSelectedLaboratories().reduce((sum, item) => sum + item.behandlungszeit, 0);
+    let followUpTime = this.getSelectedFollowUps().reduce((sum, item) => sum + item.behandlungszeit, 0);
 
     return medicalHistoryTime + examinationTime + laboratoryTime + followUpTime;
   }
