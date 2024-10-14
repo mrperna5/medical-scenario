@@ -13,11 +13,16 @@ import { FollowUpResultsComponent } from './follow-up/follow-up-results/follow-u
 import { FollowUpDiagnosisComponent } from './follow-up/follow-up-diagnosis/follow-up-diagnosis.component';
 import { SummaryComponent } from './summary/summary.component';
 import { ScenarioComponent } from './scenario/scenario.component';
+import { IntroductionComponent } from './introduction/introduction.component';
 
 export const routes: Routes = [
     {
         path: '', 
-        component: ScenarioComponent
+        component: IntroductionComponent
+    },
+    {
+        path: 'introduction',
+        component: IntroductionComponent
     },
     {
         path: 'scenario',

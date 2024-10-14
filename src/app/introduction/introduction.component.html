@@ -1,0 +1,14 @@
+<div class="welcome-message">
+  <h3>Willkommen zum medizinischen Diagnosespiel!</h3>
+  <p>Vor dem Start möchten wir Sie bitten, den Namen Ihres Teams einzugeben. Dies hilft uns, Ihre Ergebnisse zu speichern und das Spiel noch spannender zu gestalten!</p>
+</div>
+
+<h2>Enter your Team name</h2>
+
+<form (ngSubmit)="onSubmit()">
+<div class="form-group">
+  <input id="teamName" type="text" [(ngModel)]="teamName" name="teamName" class="form-control" [placeholder]="teamPlaceholder" />
+</div>
+
+<button type="submit" class="submit-button">To Scenarios!</button>
+</form>
