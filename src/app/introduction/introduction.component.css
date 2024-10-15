@@ -59,4 +59,26 @@ h2 {
     outline: none;
 }
 
-  
+.scenario-selection {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+.scenario-button {
+    background-color: #f1f1f1; 
+    color: #333; 
+    border: 2px solid #ccc; 
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  }
+
+  .scenario-button.selected {
+    background-color: #4caf50; 
+    color: white; 
+    border-color: #388e3c; 
+  }

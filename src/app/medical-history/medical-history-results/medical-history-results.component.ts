@@ -17,7 +17,7 @@ export class MedicalHistoryResultsComponent {
   constructor(private scenarioService: ScenarioService) { }
 
   ngOnInit(): void {
-    this.selectedItems = this.scenarioService.getSelectedHistories();  // Get selected items
+    this.selectedItems = this.scenarioService.getSelectedHistories(); 
   }
 
   // Calculate total cost, doctor's time, and patient's time

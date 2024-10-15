@@ -1,14 +1,64 @@
 <div class="welcome-message">
   <h3>Willkommen zum medizinischen Diagnosespiel!</h3>
-  <p>Vor dem Start möchten wir Sie bitten, den Namen Ihres Teams einzugeben. Dies hilft uns, Ihre Ergebnisse zu speichern und das Spiel noch spannender zu gestalten!</p>
+  <p>
+    Vor dem Start möchten wir Sie bitten, den Namen Ihres Teams einzugeben. Dies
+    hilft uns, Ihre Ergebnisse zu speichern und das Spiel noch spannender zu
+    gestalten!
+  </p>
 </div>
-
-<h2>Enter your Team name</h2>
 
 <form (ngSubmit)="onSubmit()">
-<div class="form-group">
-  <input id="teamName" type="text" [(ngModel)]="teamName" name="teamName" class="form-control" [placeholder]="teamPlaceholder" />
-</div>
+  <div class="form-group">
+    <h2>Enter your Team name</h2>
+    <input
+      id="teamName"
+      type="text"
+      [(ngModel)]="teamName"
+      name="teamName"
+      class="form-control"
+      [placeholder]="teamPlaceholder"
+    />
+  </div>
 
-<button type="submit" class="submit-button">To Scenarios!</button>
+  <h2>Choose your Scenario</h2>
+  <div class="scenario-selection">
+    <button
+      type="button"
+      class="scenario-button"
+      [class.selected]="selectedScenarioId === 1"
+      (click)="selectScenario(1)"
+    >
+      Scenario 1
+    </button>
+    <button
+      type="button"
+      class="scenario-button"
+      [class.selected]="selectedScenarioId === 2"
+      (click)="selectScenario(2)"
+    >
+      Scenario 2
+    </button>
+    <button
+      type="button"
+      class="scenario-button"
+      [class.selected]="selectedScenarioId === 3"
+      (click)="selectScenario(3)"
+    >
+      Scenario 3
+    </button>
+    <button
+      type="button"
+      class="scenario-button"
+      [class.selected]="selectedScenarioId === 4"
+      (click)="selectScenario(4)"
+    >
+      Scenario 4
+    </button>
+  </div>
+
+  @if (selectedScenarioId) {
+  <button type="submit" class="submit-button" [disabled]="!selectedScenarioId">
+    To Scenarios!
+  </button>
+  }
 </form>

@@ -1,27 +1,23 @@
 import { Injectable } from '@angular/core';
 import { MedicalOption } from './option.model';
-import { medicalHistories } from './data/medical-histories';
-import { examinations } from './data/examinations';
-import { laboratories } from './data/laboratories';
-import { followups } from './data/follow-ups';
+import { patientScenario1 } from './scenario/scenario-data/scenario1/patient-scenario1';
+import { medicalHistories1 } from './scenario/scenario-data/scenario1/medical-histories1';
+import { examinations1 } from './scenario/scenario-data/scenario1/examinations1';
+import { laboratories1 } from './scenario/scenario-data/scenario1/laboratories1';
+import { followups1 } from './scenario/scenario-data/scenario1/follow-ups1';
+import { examinations2 } from './scenario/scenario-data/scenario2/examinations2';
+import { followups2 } from './scenario/scenario-data/scenario2/follow-ups2';
+import { laboratories2 } from './scenario/scenario-data/scenario2/laboratories2';
+import { medicalHistories2 } from './scenario/scenario-data/scenario2/medical-histories2';
+import { patientScenario2 } from './scenario/scenario-data/scenario2/patient-scenario2';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ScenarioService {
-  // private selectedMedicalHistories: MedicalOption[] = [];  // To store selected items
-  // private medicalHistoryDiagnosisGuesses: string[] = []; // To store the five guesses
-
-  // private selectExaminations: MedicalOption[] = [];  // To store selected items
-  // private examinationDiagnosisGuesses: string[] = []; // To store the five guesses
-
-  // private selectLaboratories: MedicalOption[] = [];  // To store selected items
-  // private laboratoryDiagnosisGuesses: string[] = []; // To store the five guesses
-
-  // private selectFollowUps: MedicalOption[] = [];  // To store selected items
-  // private followUpDiagnosisGuesses: string[] = []; // To store the five guesses
-
   private teamNameKey = 'teamName';
+  private selectedScenarioKey = 'selectedScenario';
+  private patientScenarioKey = 'patientScenario';
 
   private selectedMedicalHistoriesKey = 'selectedMedicalHistories';
   private medicalHistoryDiagnosisGuessesKey = 'medicalHistoryDiagnosisGuesses';
@@ -35,7 +31,19 @@ export class ScenarioService {
   private selectedFollowUpsKey = 'selectedFollowUps';
   private followUpDiagnosisGuessesKey = 'followUpDiagnosisGuesses';
 
-  constructor() {}
+  private activeMedicalHistoriesKey = 'activeMedicalHistories'
+  private activeExaminationsKey = 'activeExaminations'
+  private activeLaboratoriesKey = 'activeLaboratories'
+  private activeFollowUpsKey = 'activeFollowUps'
+
+  private activePatientScenario: any;
+  private activeMedicalHistories: MedicalOption[] = [];
+  private activeExaminations: MedicalOption[] = [];
+  private activeLaboratories: MedicalOption[] = [];
+  private activeFollowUps: MedicalOption[] = [];
+
+  constructor() {
+  }
   /* Introduction Methods*/
   saveTeamName(teamName: string): void {
     localStorage.setItem(this.teamNameKey, teamName);
@@ -46,10 +54,85 @@ export class ScenarioService {
     return data ? data : '';
   }
 
+  saveSelectedScenario(scenarioNumber: number): void {
+    localStorage.setItem(
+      this.selectedScenarioKey,
+      JSON.stringify(scenarioNumber)
+    );
+    this.loadScenarioData(scenarioNumber);
+  }
+
+  getSelectedScenario(): number {
+    const data = localStorage.getItem(this.selectedScenarioKey);
+    return data ? JSON.parse(data) : null;
+  }
+
+  getPatientScenario(): any {
+    const data = localStorage.getItem(this.patientScenarioKey);
+    return data ? JSON.parse(data) : null;
+  }
+
+  savePatientScenario(patientScenario: any): void {
+    // this.selectedMedicalHistories = [...selectedItems];
+    localStorage.setItem(
+      this.patientScenarioKey,
+      JSON.stringify(patientScenario)
+    );
+  }
+
+  /* Load scenario data based on the selected scenario */
+  loadScenarioData(scenarioNumber: number): void {
+    switch (scenarioNumber) {
+      case 1:
+        this.activePatientScenario = patientScenario1;
+        this.activeMedicalHistories = medicalHistories1;
+        this.activeExaminations = examinations1;
+        this.activeLaboratories = laboratories1;
+        this.activeFollowUps = followups1;
+        break;
+      case 2:
+        this.activePatientScenario = patientScenario2;
+        this.activeMedicalHistories = medicalHistories2;
+        this.activeExaminations = examinations2;
+        this.activeLaboratories = laboratories2;
+        this.activeFollowUps = followups2;
+        break;
+      default:
+        break;
+    }
+
+    this.saveScenarioData();
+  }
+
+  private saveScenarioData(): void {
+    localStorage.setItem(
+      this.patientScenarioKey,
+      JSON.stringify(this.activePatientScenario)
+    );
+    localStorage.setItem(
+      this.activeMedicalHistoriesKey,
+      JSON.stringify(this.activeMedicalHistories)
+    );
+    localStorage.setItem(
+      this.activeExaminationsKey,
+      JSON.stringify(this.activeExaminations)
+    );
+    localStorage.setItem(
+      this.activeLaboratoriesKey,
+      JSON.stringify(this.activeLaboratories)
+    );
+    localStorage.setItem(
+      this.activeFollowUpsKey,
+      JSON.stringify(this.activeFollowUps)
+    );
+  }
+
+
   /* Medical History (Anamnese) Methods*/
   // Get all medical history options (Anamnese round)
   getMedicalHistories(): MedicalOption[] {
-    return medicalHistories;
+    const data = localStorage.getItem(this.activeMedicalHistoriesKey);
+    return data ? JSON.parse(data) : [];
   }
 
   // Save selected items after form submission
@@ -87,7 +170,8 @@ export class ScenarioService {
   /* Examination (Untersuchung) Methods*/
   // Get all examination options (Untersuchung round)
   getExaminations(): MedicalOption[] {
-    return examinations;
+    const data = localStorage.getItem(this.activeExaminationsKey);
+    return data ? JSON.parse(data) : [];
   }
 
   // Save selected items after form submission
@@ -121,7 +205,8 @@ export class ScenarioService {
   /* Laboratories (Labordiagnostik) Methods*/
   // Get all examination options (Untersuchung round)
   getLaboratories(): MedicalOption[] {
-    return laboratories;
+    const data = localStorage.getItem(this.activeLaboratoriesKey);
+    return data ? JSON.parse(data) : [];
   }
 
   // Save selected items after form submission
@@ -155,7 +240,8 @@ export class ScenarioService {
   /* Follow-Ups (Weitere Diagnostik) Methods*/
   // Get all examination options (Untersuchung round)
   getFollowUps(): MedicalOption[] {
-    return followups;
+    const data = localStorage.getItem(this.activeFollowUpsKey);
+    return data ? JSON.parse(data) : [];
   }
 
   // Save selected items after form submission

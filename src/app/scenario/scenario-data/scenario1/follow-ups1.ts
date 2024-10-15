@@ -1,6 +1,7 @@
-import { MedicalOption } from "../option.model";
+import { MedicalOption } from "../../../option.model";
 
-export const followups: MedicalOption[] = [
+
+export const followups1: MedicalOption[] = [
     new MedicalOption('Weitere Diagnostik', '4.1.', 0, 'Blutkultur, 1 Paar', 0, 3, 62.7, 
       ['Nicht durchgeführt']
     ),

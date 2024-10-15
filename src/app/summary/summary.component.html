@@ -42,7 +42,7 @@ selectedLaboratories.length > 0 || selectedFollowUps.length > 0) {
         <span>{{ getTotalPatientTime(selectedMedicalHistories) }} Min</span>
       </h3>
     </div>
-    <h4>Diagnosis Guesses:</h4>
+    <h3>Diagnosis Guesses:</h3>
     <ul>
       @for (guess of medicalHistoryDiagnosisGuesses; track $index) {
       <li>{{ guess }}</li>
@@ -87,7 +87,7 @@ selectedLaboratories.length > 0 || selectedFollowUps.length > 0) {
         <span>{{ getTotalPatientTime(selectedExaminations) }} Min</span>
       </h3>
     </div>
-    <h4>Diagnosis Guesses:</h4>
+    <h3>Diagnosis Guesses:</h3>
     <ul>
       @for (guess of examinationDiagnosisGuesses; track $index) {
       <li>{{ guess }}</li>
@@ -132,7 +132,7 @@ selectedLaboratories.length > 0 || selectedFollowUps.length > 0) {
         <span>{{ getTotalPatientTime(selectedLaboratories) }} Min</span>
       </h3>
     </div>
-    <h4>Diagnosis Guesses:</h4>
+    <h3>Diagnosis Guesses:</h3>
     <ul>
       @for (guess of laboratoryDiagnosisGuesses; track $index) {
       <li>{{ guess }}</li>
@@ -177,7 +177,7 @@ selectedLaboratories.length > 0 || selectedFollowUps.length > 0) {
         <span>{{ getTotalPatientTime(selectedFollowUps) }} Min</span>
       </h3>
     </div>
-    <h4>Diagnosis Guesses:</h4>
+    <h3>Diagnosis Guesses:</h3>
     <ul>
       @for (guess of followUpDiagnosisGuesses; track $index) {
       <li>{{ guess }}</li>

@@ -77,7 +77,10 @@ form {
 .results-table {
   width: 100%;
   border-collapse: collapse;
-  margin: 20px 0;
+  margin: 20px auto;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  width: 100%;
+  max-width: 800px;
 }
 
 .results-table th,
@@ -110,6 +113,10 @@ form {
   background-color: #e0f7fa;
   border-radius: 5px;
   font-weight: bold;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
 }
 
 .totals h3 {
@@ -149,7 +156,8 @@ form {
 .summary-card ul {
   list-style: none;
   padding: 0;
-  margin: 20px 0;
+  margin: 20px auto;
+  width: fit-content;
 }
 
 .summary-card ul li {
@@ -157,6 +165,7 @@ form {
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
+  margin: 20px auto;
 }
 
 /* ------------------------- */

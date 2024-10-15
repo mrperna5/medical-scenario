@@ -1,6 +1,7 @@
-import { MedicalOption } from "../option.model";
+import { MedicalOption } from "../../../option.model";
 
-export const examinations: MedicalOption[] = [
+
+export const examinations1: MedicalOption[] = [
     new MedicalOption('Untersuchung', '2.1.', 1, 'AZ & EZ', 1, 1, 0.7, 
       ['Patient in reduziertem AZ, normaler EZ (178cm, 77kg)']
     ),

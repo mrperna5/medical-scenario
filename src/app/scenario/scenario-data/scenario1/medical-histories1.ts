@@ -1,7 +1,6 @@
-import { MedicalOption } from "../option.model";
+import { MedicalOption } from "../../../option.model";
 
-
-export const medicalHistories: MedicalOption[] = [
+export const medicalHistories1: MedicalOption[] = [
     new MedicalOption('Anamnese', '1.1.', 1, 'Aktuelle Beschwerden', 3, 3, 2, 
         [
           'Am Vortag sei einmalig Fieber von 39°C gemessen worden',

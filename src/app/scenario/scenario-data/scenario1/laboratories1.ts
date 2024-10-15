@@ -1,6 +1,7 @@
-import { MedicalOption } from "../option.model";
+import { MedicalOption } from "../../../option.model";
 
-export const laboratories: MedicalOption[] = [
+
+export const laboratories1: MedicalOption[] = [
     new MedicalOption('Labordiagnostik', '3.1.', 1, 'BB', 0, 0.5, 1.6, 
       ['Leukozytose (13.000/µl), normochrome normozytäre Anämie (Hb 10.8 g/dl)']
     ),
