@@ -1,5 +1,6 @@
+import { PatientScenario } from "../patient-scenario.model";
 
-export const patientScenario2 = {
+export const patientScenario2: PatientScenario = {
     mysteryCase: `
       Ein 45-jähriger männlicher Patient mit bekannter Diabetes Typ 2 wurde am 10.04.2022 in die Notaufnahme eingeliefert.
       Der Patient klagt über starke Bauchschmerzen und hat in der Vorgeschichte mehrere Hyperglykämie-Episoden erlitten.
