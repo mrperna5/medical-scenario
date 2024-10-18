@@ -1,5 +1,5 @@
 import { Component, inject, input, output } from '@angular/core';
-import { MedicalOption } from '../../option.model';
+import { MedicalOption } from '../../scenario/scenario-data/medical-option.model';
 import { Router } from '@angular/router';
 import { ScenarioService } from '../../scenario.service';
 

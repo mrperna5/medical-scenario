@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MedicalOption } from './option.model';
+import { MedicalOption } from './scenario/scenario-data/medical-option.model';
 import { patientScenario1 } from './scenario/scenario-data/scenario1/patient-scenario1';
 import { medicalHistories1 } from './scenario/scenario-data/scenario1/medical-histories1';
 import { examinations1 } from './scenario/scenario-data/scenario1/examinations1';

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, input, OnInit } from '@angular/core';
-import { MedicalOption } from '../../option.model';
+import { MedicalOption } from '../../scenario/scenario-data/medical-option.model';
 import { RouterLink } from '@angular/router';
 
 @Component({

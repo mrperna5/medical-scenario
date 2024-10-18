@@ -1,4 +1,6 @@
-export const patientScenario1 = {
+import { PatientScenario } from "../patient-scenario.model";
+
+export const patientScenario1: PatientScenario = {
     mysteryCase: `
       Ein 27-jähriger tetraplegischer Patient (Zustand nach Autounfall im Jahr 2000) wird am 13.02.2001 um 20:40 Uhr vom Notarzt in Ihre Notaufnahme eingeliefert.
       Der Patient entwickelte akut eine „innere Unruhe“ und „starkes Zittern“ und hat in der Vorgeschichte mehrere epileptische Anfälle erlitten.

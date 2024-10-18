@@ -1,53 +1,164 @@
-import { MedicalOption } from "../../../option.model";
-
+import { MedicalOption } from "../medical-option.model";
 
 export const laboratories1: MedicalOption[] = [
-    new MedicalOption('Labordiagnostik', '3.1.', 1, 'BB', 0, 0.5, 1.6, 
-      ['Leukozytose (13.000/µl), normochrome normozytäre Anämie (Hb 10.8 g/dl)']
-    ),
-    new MedicalOption('Labordiagnostik', '3.2.', 1, 'Diff. BB', 0, 0.5, 1, 
-      ['Linksverschiebung, keine Blasten, keine Dysplasiezeichen']
-    ),
-    new MedicalOption('Labordiagnostik', '3.3.', 1, 'Na+, K+, Glukose', 0, 0.5, 3, 
-      ['Normwerte, keine Auffälligkeiten']
-    ),
-    new MedicalOption('Labordiagnostik', '3.4.', 1, 'Ca++, Cl-, Phosphat', 0, 0.5, 3.3, 
-      ['Normwerte, keine Auffälligkeiten']
-    ),
-    new MedicalOption('Labordiagnostik', '3.5.', 1, 'Kreatinin, HST, HSR', 0, 0.5, 3, 
-      ['Kreatinin 1.2 mg/dl, Harnstoff 45 mg/dl, Normbereich']
-    ),
-    new MedicalOption('Labordiagnostik', '3.6.', 1, 'GOT, GPT, AP, Bilirubin', 0, 0.5, 5, 
-      ['Normwerte, keine Auffälligkeiten']
-    ),
-    new MedicalOption('Labordiagnostik', '3.7.', 0, 'Blutsenkung', 0, 0.5, 1, 
-      ['Nicht durchgeführt']
-    ),
-    new MedicalOption('Labordiagnostik', '3.8.', 1, 'CRP', 0, 0.5, 6, 
-      ['CRP erhöht (11 mg/dl)']
-    ),
-    new MedicalOption('Labordiagnostik', '3.9.', 1, 'CK, LDH', 0, 0.5, 2.5, 
-      ['Leicht erhöhte CK (200 U/l), LDH normal']
-    ),
-    new MedicalOption('Labordiagnostik', '3.10.', 1, 'Quick & PTT', 0, 0.5, 3, 
-      ['Normwerte, keine Auffälligkeiten']
-    ),
-    new MedicalOption('Labordiagnostik', '3.11.', 0, 'Fibrinogen, D-Dimer, AT III', 0, 0.5, 17, 
-      ['Nicht durchgeführt']
-    ),
-    new MedicalOption('Labordiagnostik', '3.12.', 1, 'TSH', 0, 0.5, 9, 
-      ['TSH normal']
-    ),
-    new MedicalOption('Labordiagnostik', '3.13.', 1, 'Urinstix', 0, 0.5, 1.2, 
-      ['Leukozyturie, keine Nitrite']
-    ),
-    new MedicalOption('Labordiagnostik', '3.14.', 1, 'Valproinsäure Spiegel', 0, 0.5, 9, 
-      ['Valproinsäure Spiegel 90 µg/ml (Therapeutischer Bereich)']
-    ),
-    new MedicalOption('Labordiagnostik', '3.15.', 0, 'Venöse BGA', 0, 0.5, 5.4, 
-      ['Nicht durchgeführt']
-    ),
-    new MedicalOption('Labordiagnostik', '3.16.', 0, 'Arterielle BGA', 10, 10, 11.4, 
-      ['Nicht durchgeführt']
-    )
-  ];
+    {
+        rubrik: 'Labordiagnostik',
+        code: '3.1.',
+        gewaehlt: 1,
+        item: 'BB',
+        aerztlicheArbeitszeit: 0,
+        behandlungszeit: 0.5,
+        behandlungskosten: 1.6,
+        results: ['Leukozytose (13.000/µl), normochrome normozytäre Anämie (Hb 10.8 g/dl)']
+    },
+    {
+        rubrik: 'Labordiagnostik',
+        code: '3.2.',
+        gewaehlt: 1,
+        item: 'Diff. BB',
+        aerztlicheArbeitszeit: 0,
+        behandlungszeit: 0.5,
+        behandlungskosten: 1,
+        results: ['Linksverschiebung, keine Blasten, keine Dysplasiezeichen']
+    },
+    {
+        rubrik: 'Labordiagnostik',
+        code: '3.3.',
+        gewaehlt: 1,
+        item: 'Na+, K+, Glukose',
+        aerztlicheArbeitszeit: 0,
+        behandlungszeit: 0.5,
+        behandlungskosten: 3,
+        results: ['Normwerte, keine Auffälligkeiten']
+    },
+    {
+        rubrik: 'Labordiagnostik',
+        code: '3.4.',
+        gewaehlt: 1,
+        item: 'Ca++, Cl-, Phosphat',
+        aerztlicheArbeitszeit: 0,
+        behandlungszeit: 0.5,
+        behandlungskosten: 3.3,
+        results: ['Normwerte, keine Auffälligkeiten']
+    },
+    {
+        rubrik: 'Labordiagnostik',
+        code: '3.5.',
+        gewaehlt: 1,
+        item: 'Kreatinin, HST, HSR',
+        aerztlicheArbeitszeit: 0,
+        behandlungszeit: 0.5,
+        behandlungskosten: 3,
+        results: ['Kreatinin 1.2 mg/dl, Harnstoff 45 mg/dl, Normbereich']
+    },
+    {
+        rubrik: 'Labordiagnostik',
+        code: '3.6.',
+        gewaehlt: 1,
+        item: 'GOT, GPT, AP, Bilirubin',
+        aerztlicheArbeitszeit: 0,
+        behandlungszeit: 0.5,
+        behandlungskosten: 5,
+        results: ['Normwerte, keine Auffälligkeiten']
+    },
+    {
+        rubrik: 'Labordiagnostik',
+        code: '3.7.',
+        gewaehlt: 0,
+        item: 'Blutsenkung',
+        aerztlicheArbeitszeit: 0,
+        behandlungszeit: 0.5,
+        behandlungskosten: 1,
+        results: ['Nicht durchgeführt']
+    },
+    {
+        rubrik: 'Labordiagnostik',
+        code: '3.8.',
+        gewaehlt: 1,
+        item: 'CRP',
+        aerztlicheArbeitszeit: 0,
+        behandlungszeit: 0.5,
+        behandlungskosten: 6,
+        results: ['CRP erhöht (11 mg/dl)']
+    },
+    {
+        rubrik: 'Labordiagnostik',
+        code: '3.9.',
+        gewaehlt: 1,
+        item: 'CK, LDH',
+        aerztlicheArbeitszeit: 0,
+        behandlungszeit: 0.5,
+        behandlungskosten: 2.5,
+        results: ['Leicht erhöhte CK (200 U/l), LDH normal']
+    },
+    {
+        rubrik: 'Labordiagnostik',
+        code: '3.10.',
+        gewaehlt: 1,
+        item: 'Quick & PTT',
+        aerztlicheArbeitszeit: 0,
+        behandlungszeit: 0.5,
+        behandlungskosten: 3,
+        results: ['Normwerte, keine Auffälligkeiten']
+    },
+    {
+        rubrik: 'Labordiagnostik',
+        code: '3.11.',
+        gewaehlt: 0,
+        item: 'Fibrinogen, D-Dimer, AT III',
+        aerztlicheArbeitszeit: 0,
+        behandlungszeit: 0.5,
+        behandlungskosten: 17,
+        results: ['Nicht durchgeführt']
+    },
+    {
+        rubrik: 'Labordiagnostik',
+        code: '3.12.',
+        gewaehlt: 1,
+        item: 'TSH',
+        aerztlicheArbeitszeit: 0,
+        behandlungszeit: 0.5,
+        behandlungskosten: 9,
+        results: ['TSH normal']
+    },
+    {
+        rubrik: 'Labordiagnostik',
+        code: '3.13.',
+        gewaehlt: 1,
+        item: 'Urinstix',
+        aerztlicheArbeitszeit: 0,
+        behandlungszeit: 0.5,
+        behandlungskosten: 1.2,
+        results: ['Leukozyturie, keine Nitrite']
+    },
+    {
+        rubrik: 'Labordiagnostik',
+        code: '3.14.',
+        gewaehlt: 1,
+        item: 'Valproinsäure Spiegel',
+        aerztlicheArbeitszeit: 0,
+        behandlungszeit: 0.5,
+        behandlungskosten: 9,
+        results: ['Valproinsäure Spiegel 90 µg/ml (Therapeutischer Bereich)']
+    },
+    {
+        rubrik: 'Labordiagnostik',
+        code: '3.15.',
+        gewaehlt: 0,
+        item: 'Venöse BGA',
+        aerztlicheArbeitszeit: 0,
+        behandlungszeit: 0.5,
+        behandlungskosten: 5.4,
+        results: ['Nicht durchgeführt']
+    },
+    {
+        rubrik: 'Labordiagnostik',
+        code: '3.16.',
+        gewaehlt: 0,
+        item: 'Arterielle BGA',
+        aerztlicheArbeitszeit: 10,
+        behandlungszeit: 10,
+        behandlungskosten: 11.4,
+        results: ['Nicht durchgeführt']
+    }
+];

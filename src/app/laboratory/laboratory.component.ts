@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MedicalOption } from '../option.model';
+import { MedicalOption } from '../scenario/scenario-data/medical-option.model';
 import { ScenarioService } from '../scenario.service';
 import { RoundSelectionComponent } from "../shared/round-selection/round-selection.component";
 
