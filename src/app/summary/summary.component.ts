@@ -41,6 +41,9 @@ export class SummaryComponent {
       this.scenarioService.getLaboratoryDiagnosisGuesses();
     this.followUpDiagnosisGuesses =
       this.scenarioService.getFollowUpsDiagnosisGuesses();
+
+      console.log(this.selectedMedicalHistories)
+      console.log(this.medicalHistoryDiagnosisGuesses)
   }
 
   // Calculate total cost for a given set of medical options

@@ -31,10 +31,10 @@ export class ScenarioService {
   private selectedFollowUpsKey = 'selectedFollowUps';
   private followUpDiagnosisGuessesKey = 'followUpDiagnosisGuesses';
 
-  private activeMedicalHistoriesKey = 'activeMedicalHistories'
-  private activeExaminationsKey = 'activeExaminations'
-  private activeLaboratoriesKey = 'activeLaboratories'
-  private activeFollowUpsKey = 'activeFollowUps'
+  private activeMedicalHistoriesKey = 'activeMedicalHistories';
+  private activeExaminationsKey = 'activeExaminations';
+  private activeLaboratoriesKey = 'activeLaboratories';
+  private activeFollowUpsKey = 'activeFollowUps';
 
   private activePatientScenario: any;
   private activeMedicalHistories: MedicalOption[] = [];
@@ -42,8 +42,7 @@ export class ScenarioService {
   private activeLaboratories: MedicalOption[] = [];
   private activeFollowUps: MedicalOption[] = [];
 
-  constructor() {
-  }
+  constructor() {}
   /* Introduction Methods*/
   saveTeamName(teamName: string): void {
     localStorage.setItem(this.teamNameKey, teamName);
@@ -127,7 +126,6 @@ export class ScenarioService {
     );
   }
 
-
   /* Medical History (Anamnese) Methods*/
   // Get all medical history options (Anamnese round)
   getMedicalHistories(): MedicalOption[] {
@@ -142,6 +140,7 @@ export class ScenarioService {
       this.selectedMedicalHistoriesKey,
       JSON.stringify(selectedItems)
     );
+    console.log('Saved Histories: ' + selectedItems);
   }
 
   // Get selected items for review
@@ -149,6 +148,7 @@ export class ScenarioService {
     // return this.selectedMedicalHistories;
     const data = localStorage.getItem(this.selectedMedicalHistoriesKey);
     return data ? JSON.parse(data) : [];
+    console.log('Got Histores' + data);
   }
 
   // Method to save medical history diagnostic guesses

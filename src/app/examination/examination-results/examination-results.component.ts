@@ -3,11 +3,12 @@ import { MedicalOption } from '../../option.model';
 import { ScenarioService } from '../../scenario.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { RoundResultsComponent } from "../../shared/round-results/round-results.component";
 
 @Component({
   selector: 'app-examination-results',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, RoundResultsComponent],
   templateUrl: './examination-results.component.html',
   styleUrl: './examination-results.component.css'
 })
@@ -17,19 +18,6 @@ export class ExaminationResultsComponent {
   constructor(private scenarioService: ScenarioService) { }
 
   ngOnInit(): void {
-    this.selectedItems = this.scenarioService.getSelectedExaminations();  // Get selected items
-  }
-
-  // Calculate total cost, doctor's time, and patient's time
-  getTotalCost(): number {
-    return this.selectedItems.reduce((sum, item) => sum + item.behandlungskosten, 0);
-  }
-
-  getTotalDoctorTime(): number {
-    return this.selectedItems.reduce((sum, item) => sum + item.aerztlicheArbeitszeit, 0);
-  }
-
-  getTotalPatientTime(): number {
-    return this.selectedItems.reduce((sum, item) => sum + item.behandlungszeit, 0);
+    this.selectedItems = this.scenarioService.getSelectedExaminations(); 
   }
 }

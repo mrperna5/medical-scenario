@@ -1,18 +1,7 @@
-<form class="selection-form">
-    <h3>Runde 2: Untersuchung</h3>
-  
-    <div class="grid-container">
-    @for (item of examinations; track item.code) {  
-      <div class="grid-item">
-        <label>
-          <input type="checkbox" (change)="onSelectionChange(item, $event)" />
-          {{ item.code }} {{ item.item }}
-        </label>
-      </div>
-    }
-    </div>
-  
-    <button type="button" class="submit-button" (click)="onSubmit()">Submit</button>
-  </form>
-
-  
+  <app-round-selection
+  [title]="'Runde 2: Untersuchung'"
+  [items]="examinations"
+  [navigateTo]="'/examination-results'"
+  [roundName]="'examination'"
+>
+</app-round-selection>

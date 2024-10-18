@@ -1,8 +1,8 @@
-<!-- <form class="selection-form">
-    <h3>Runde 4: Weitere Diagnostik</h3>
+<form class="selection-form">
+    <h3 class="title">{{ title() }}</h3>
   
     <div class="grid-container">
-    @for (item of followUps; track item.code) {  
+    @for (item of items(); track item.code) {  
       <div class="grid-item">
         <label>
           <input type="checkbox" (change)="onSelectionChange(item, $event)" />
@@ -13,14 +13,6 @@
     </div>
   
     <button type="button" class="submit-button" (click)="onSubmit()">Submit</button>
-  </form> -->
-
-  <app-round-selection
-  [title]="'Runde 4: Weitere Diagnostik'"
-  [items]="followUps"
-  [navigateTo]="'/follow-up-results'"
-  [roundName]="'follow-up'"
->
-</app-round-selection>
+  </form>
 
   
