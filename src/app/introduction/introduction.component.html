@@ -1,4 +1,4 @@
-<div class="welcome-message">
+<!-- <div class="welcome-message">
   <h3>Willkommen zum medizinischen Diagnosespiel!</h3>
   <p>
     Vor dem Start möchten wir Sie bitten, den Namen Ihres Teams einzugeben. Dies
@@ -6,59 +6,34 @@
     gestalten!
   </p>
 </div>
+-->
 
-<form (ngSubmit)="onSubmit()">
-  <div class="form-group">
+<div class="container">
+  <button [routerLink]="'/game-rules'" class="header">Einführung</button>
+  <form (ngSubmit)="onSubmit()">
+  <div class="grid">
+    @for (case of cases; track $index) {
+      <button class="scenario-button" type="button" [class.selected]="selectedScenarioId === ($index + 1)" (click)="selectScenario($index + 1)">
+          {{ case }}
+      </button>
+    }
+  </div>
+  @if (selectedScenarioId) {
+  <div class="team-name-section">
     <h2>Enter your Team name</h2>
     <input
       id="teamName"
       type="text"
       [(ngModel)]="teamName"
       name="teamName"
-      class="form-control"
       [placeholder]="teamPlaceholder"
     />
   </div>
-
-  <h2>Choose your Scenario</h2>
-  <div class="scenario-selection">
-    <button
-      type="button"
-      class="scenario-button"
-      [class.selected]="selectedScenarioId === 1"
-      (click)="selectScenario(1)"
-    >
-      Scenario 1
+}
+  @if (selectedScenarioId && teamName && teamName.trim() !== '') {
+    <button type="submit" class="submit-button" [disabled]="!selectedScenarioId">
+      To Scenarios!
     </button>
-    <button
-      type="button"
-      class="scenario-button"
-      [class.selected]="selectedScenarioId === 2"
-      (click)="selectScenario(2)"
-    >
-      Scenario 2
-    </button>
-    <button
-      type="button"
-      class="scenario-button"
-      [class.selected]="selectedScenarioId === 3"
-      (click)="selectScenario(3)"
-    >
-      Scenario 3
-    </button>
-    <button
-      type="button"
-      class="scenario-button"
-      [class.selected]="selectedScenarioId === 4"
-      (click)="selectScenario(4)"
-    >
-      Scenario 4
-    </button>
-  </div>
-
-  @if (selectedScenarioId) {
-  <button type="submit" class="submit-button" [disabled]="!selectedScenarioId">
-    To Scenarios!
-  </button>
-  }
-</form>
+    }
+  </form>
+</div>

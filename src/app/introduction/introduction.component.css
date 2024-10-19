@@ -1,6 +1,6 @@
-.welcome-message {
+/* .welcome-message {
     text-align: center;
-    margin: 40px auto 30px auto; /* Added more margin for better spacing */
+    margin: 40px auto 30px auto; 
     max-width: 600px;
     padding: 20px;
     background-color: #ecf0f1;
@@ -29,35 +29,7 @@ h2 {
     font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
-.form-group {
-    margin: 20px auto;
-    max-width: 400px;
-    text-align: left;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-}
 
-.form-group label {
-    display: block;
-    font-size: 16px;
-    color: #34495e;
-    margin-bottom: 10px;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 10px 15px;
-    font-size: 16px;
-    border-radius: 6px;
-    border: 1px solid #bdc3c7;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s;
-}
-
-.form-group input:focus {
-    border-color: #3498db;
-    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
-    outline: none;
-}
 
 .scenario-selection {
     display: flex;
@@ -81,4 +53,79 @@ h2 {
     background-color: #4caf50; 
     color: white; 
     border-color: #388e3c; 
+  } */
+
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  font-size: 2em;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 200px);
+  grid-gap: 20px;
+}
+
+.scenario-button {
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.scenario-button.selected {
+    background-color: #4caf50; 
+    color: white; 
+    border-color: #388e3c; 
   }
+
+.scenario-button:hover {
+  background-color: #e0e0e0;
+}
+
+.team-name-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px auto;
+    max-width: 400px;
+    text-align: center;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.team-name-section input {
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #bdc3c7;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+    margin-top: 10px;
+}
+
+.team-name-section input:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+    outline: none;
+}

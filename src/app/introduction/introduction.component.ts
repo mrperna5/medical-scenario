@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ScenarioService } from '../scenario.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-introduction',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './introduction.component.html',
   styleUrl: './introduction.component.css',
 })
@@ -17,6 +17,10 @@ export class IntroductionComponent {
   teamPlaceholder: string = '';
 
   selectedScenarioId!: number;
+
+
+  cases: string[] = ['Fall 1', 'Fall 2', 'Fall 3', 'Fall 4', 'Fall 5', 'Fall 6', 
+    'Fall 7', 'Fall 8', 'Fall 9', 'Fall 10', 'Fall 11', 'Fall 12'];
 
   // Array of fun team names from Regensburg University
   teamNames: string[] = [
@@ -51,4 +55,5 @@ export class IntroductionComponent {
     this.scenarioService.saveSelectedScenario(this.selectedScenarioId);
     this.router.navigate(['/scenario']);
   }
+
 }

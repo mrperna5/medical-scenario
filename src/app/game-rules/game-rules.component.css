@@ -1,0 +1,10 @@
+.scenario-rules ul {
+    padding: 0;
+    margin-left: 20px;
+    list-style-type: disc;
+}
+
+.scenario-rules ul ul {
+    list-style-type: circle;
+    margin-left: 20px;
+}

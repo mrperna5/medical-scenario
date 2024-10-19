@@ -14,15 +14,25 @@ import { FollowUpDiagnosisComponent } from './follow-up/follow-up-diagnosis/foll
 import { SummaryComponent } from './summary/summary.component';
 import { ScenarioComponent } from './scenario/scenario.component';
 import { IntroductionComponent } from './introduction/introduction.component';
+import { TitleComponent } from './title/title.component';
+import { GameRulesComponent } from './game-rules/game-rules.component';
 
 export const routes: Routes = [
     {
         path: '', 
-        component: IntroductionComponent
+        component: TitleComponent
+    },
+    {
+        path: 'title',
+        component: TitleComponent
     },
     {
         path: 'introduction',
         component: IntroductionComponent
+    },
+    {
+        path: 'game-rules',
+        component: GameRulesComponent
     },
     {
         path: 'scenario',
