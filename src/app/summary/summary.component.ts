@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { ScenarioService } from '../scenario.service';
 import { CommonModule } from '@angular/common';
 import { MedicalOption } from '../scenario/scenario-data/medical-option.model';
@@ -11,36 +11,39 @@ import { MedicalOption } from '../scenario/scenario-data/medical-option.model';
   styleUrl: './summary.component.css',
 })
 export class SummaryComponent {
-  teamName: string = '';
-  selectedMedicalHistories: MedicalOption[] = [];
-  selectedExaminations: MedicalOption[] = [];
-  selectedLaboratories: MedicalOption[] = [];
-  selectedFollowUps: MedicalOption[] = [];
+  teamName = signal<string>('');
+  selectedMedicalHistories = signal<MedicalOption[]>([]);
+  selectedExaminations = signal<MedicalOption[]>([]);
+  selectedLaboratories = signal<MedicalOption[]>([]);
+  selectedFollowUps = signal<MedicalOption[]>([]);
 
-  medicalHistoryDiagnosisGuesses: string[] = [];
-  examinationDiagnosisGuesses: string[] = [];
-  laboratoryDiagnosisGuesses: string[] = [];
-  followUpDiagnosisGuesses: string[] = [];
+  medicalHistoryDiagnosisGuesses = signal<string[]>([]);
+  examinationDiagnosisGuesses = signal<string[]>([]);
+  laboratoryDiagnosisGuesses = signal<string[]>([]);
+  followUpDiagnosisGuesses = signal<string[]>([]);
 
   constructor(private scenarioService: ScenarioService) {}
 
   ngOnInit(): void {
-    // Retrieve the selected items and diagnosis guesses for each section
-    this.teamName = this.scenarioService.getTeamName();
+    this.teamName.set(this.scenarioService.getTeamName());
 
-    this.selectedMedicalHistories = this.scenarioService.getSelectedHistories();
-    this.selectedExaminations = this.scenarioService.getSelectedExaminations();
-    this.selectedLaboratories = this.scenarioService.getSelectedLaboratories();
-    this.selectedFollowUps = this.scenarioService.getSelectedFollowUps();
+    this.selectedMedicalHistories.set(this.scenarioService.getSelectedHistories());
+    this.selectedExaminations.set(this.scenarioService.getSelectedExaminations());
+    this.selectedLaboratories.set(this.scenarioService.getSelectedLaboratories());
+    this.selectedFollowUps.set(this.scenarioService.getSelectedFollowUps());
 
-    this.medicalHistoryDiagnosisGuesses =
-      this.scenarioService.getMedicalHistoryDiagnosisGuesses();
-    this.examinationDiagnosisGuesses =
-      this.scenarioService.getExaminationDiagnosisGuesses();
-    this.laboratoryDiagnosisGuesses =
-      this.scenarioService.getLaboratoryDiagnosisGuesses();
-    this.followUpDiagnosisGuesses =
-      this.scenarioService.getFollowUpsDiagnosisGuesses();
+    this.medicalHistoryDiagnosisGuesses.set(
+      this.scenarioService.getMedicalHistoryDiagnosisGuesses()
+    );
+    this.examinationDiagnosisGuesses.set(
+      this.scenarioService.getExaminationDiagnosisGuesses()
+    );
+    this.laboratoryDiagnosisGuesses.set(
+      this.scenarioService.getLaboratoryDiagnosisGuesses()
+    );
+    this.followUpDiagnosisGuesses.set(
+      this.scenarioService.getFollowUpsDiagnosisGuesses()
+    );
 
       console.log(this.selectedMedicalHistories)
       console.log(this.medicalHistoryDiagnosisGuesses)
@@ -64,28 +67,28 @@ export class SummaryComponent {
   // Calculate overall totals across all sections
   getTotalOverallCost(): number {
     return (
-      this.getTotalCost(this.selectedMedicalHistories) +
-      this.getTotalCost(this.selectedExaminations) +
-      this.getTotalCost(this.selectedLaboratories) +
-      this.getTotalCost(this.selectedFollowUps)
+      this.getTotalCost(this.selectedMedicalHistories()) +
+      this.getTotalCost(this.selectedExaminations()) +
+      this.getTotalCost(this.selectedLaboratories()) +
+      this.getTotalCost(this.selectedFollowUps())
     );
   }
 
   getTotalOverallDoctorTime(): number {
     return (
-      this.getTotalDoctorTime(this.selectedMedicalHistories) +
-      this.getTotalDoctorTime(this.selectedExaminations) +
-      this.getTotalDoctorTime(this.selectedLaboratories) +
-      this.getTotalDoctorTime(this.selectedFollowUps)
+      this.getTotalDoctorTime(this.selectedMedicalHistories()) +
+      this.getTotalDoctorTime(this.selectedExaminations()) +
+      this.getTotalDoctorTime(this.selectedLaboratories()) +
+      this.getTotalDoctorTime(this.selectedFollowUps())
     );
   }
 
   getTotalOverallPatientTime(): number {
     return (
-      this.getTotalPatientTime(this.selectedMedicalHistories) +
-      this.getTotalPatientTime(this.selectedExaminations) +
-      this.getTotalPatientTime(this.selectedLaboratories) +
-      this.getTotalPatientTime(this.selectedFollowUps)
+      this.getTotalPatientTime(this.selectedMedicalHistories()) +
+      this.getTotalPatientTime(this.selectedExaminations()) +
+      this.getTotalPatientTime(this.selectedLaboratories()) +
+      this.getTotalPatientTime(this.selectedFollowUps())
     );
   }
 }

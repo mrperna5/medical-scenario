@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
 import { MedicalOption } from './scenario/scenario-data/medical-option.model';
 import { patientScenario1 } from './scenario/scenario-data/scenario1/patient-scenario1';
 import { medicalHistories1 } from './scenario/scenario-data/scenario1/medical-histories1';
@@ -16,6 +16,7 @@ import { patientScenario2 } from './scenario/scenario-data/scenario2/patient-sce
 })
 export class ScenarioService {
   private teamNameKey = 'teamName';
+  private teamMembersKey = 'teamMembers';
   private selectedScenarioKey = 'selectedScenario';
   private patientScenarioKey = 'patientScenario';
 
@@ -36,14 +37,101 @@ export class ScenarioService {
   private activeLaboratoriesKey = 'activeLaboratories';
   private activeFollowUpsKey = 'activeFollowUps';
 
-  private activePatientScenario: any;
-  private activeMedicalHistories: MedicalOption[] = [];
-  private activeExaminations: MedicalOption[] = [];
-  private activeLaboratories: MedicalOption[] = [];
-  private activeFollowUps: MedicalOption[] = [];
+  private lockedRoundsKey = 'lockedRounds';
 
-  constructor() {}
+  private activePatientScenario = signal<any>(null);
+  private activeMedicalHistories = signal<MedicalOption[]>([]);
+  private activeExaminations = signal<MedicalOption[]>([]);
+  private activeLaboratories = signal<MedicalOption[]>([]);
+  private activeFollowUps = signal<MedicalOption[]>([]);
+
+  private lockedRounds = signal<{ [roundName: string]: boolean }>({});
+
+  private totalCost = computed(() => {
+    return (
+      this.activeMedicalHistories().reduce(
+        (sum, item) => sum + item.behandlungskosten,
+        0
+      ) +
+      this.activeExaminations().reduce(
+        (sum, item) => sum + item.behandlungskosten,
+        0
+      ) +
+      this.activeLaboratories().reduce(
+        (sum, item) => sum + item.behandlungskosten,
+        0
+      ) +
+      this.activeFollowUps().reduce(
+        (sum, item) => sum + item.behandlungskosten,
+        0
+      )
+    );
+  });
+
+  private totalDoctorTime = computed(() => {
+    return (
+      this.activeMedicalHistories().reduce(
+        (sum, item) => sum + item.aerztlicheArbeitszeit,
+        0
+      ) +
+      this.activeExaminations().reduce(
+        (sum, item) => sum + item.aerztlicheArbeitszeit,
+        0
+      ) +
+      this.activeLaboratories().reduce(
+        (sum, item) => sum + item.aerztlicheArbeitszeit,
+        0
+      ) +
+      this.activeFollowUps().reduce(
+        (sum, item) => sum + item.aerztlicheArbeitszeit,
+        0
+      )
+    );
+  });
+
+  private totalPatientTime = computed(() => {
+    return (
+      this.activeMedicalHistories().reduce(
+        (sum, item) => sum + item.behandlungszeit,
+        0
+      ) +
+      this.activeExaminations().reduce(
+        (sum, item) => sum + item.behandlungszeit,
+        0
+      ) +
+      this.activeLaboratories().reduce(
+        (sum, item) => sum + item.behandlungszeit,
+        0
+      ) +
+      this.activeFollowUps().reduce(
+        (sum, item) => sum + item.behandlungszeit,
+        0
+      )
+    );
+  });
+
+  constructor() {
+    const locks = localStorage.getItem(this.lockedRoundsKey);
+    if (locks) {
+      this.lockedRounds.set(JSON.parse(locks));
+    }
+  }
+
   /* Introduction Methods*/
+  public lockRound(roundName: string): void {
+
+    const currentLocks = this.lockedRounds();
+    const updatedLocks = { ...currentLocks, [roundName]: true };
+    this.lockedRounds.set(updatedLocks);
+
+    localStorage.setItem(this.lockedRoundsKey, JSON.stringify(updatedLocks));
+  }
+
+  public isRoundLocked(roundName: string): boolean {
+    const currentLocks = this.lockedRounds();
+    return !!currentLocks[roundName]; 
+  }
+
   saveTeamName(teamName: string): void {
     localStorage.setItem(this.teamNameKey, teamName);
   }
@@ -53,6 +141,34 @@ export class ScenarioService {
     return data ? data : '';
   }
 
+  private getTeamMembersKey(teamName: string): string {
+    return `${teamName}_teamMembers`;
+  }
+
+  saveTeamMembers(teamName: string, teamMembers: string[]): void {
+    const key = this.getTeamMembersKey(teamName);
+    localStorage.setItem(key, JSON.stringify(teamMembers));
+  }
+
+  getTeamMembers(teamName: string): string[] {
+    const key = this.getTeamMembersKey(teamName);
+    const data = localStorage.getItem(key);
+    return data ? JSON.parse(data) : [];
+  }
+
+  addTeamMember(teamName: string, memberName: string): void {
+    const teamMembers = this.getTeamMembers(teamName);
+    teamMembers.push(memberName);
+    this.saveTeamMembers(teamName, teamMembers);
+  }
+
+  removeTeamMember(teamName: string, memberName: string): void {
+    const teamMembers = this.getTeamMembers(teamName);
+    const updatedMembers = teamMembers.filter(
+      (member) => member !== memberName
+    );
+    this.saveTeamMembers(teamName, updatedMembers);
+  }
   saveSelectedScenario(scenarioNumber: number): void {
     localStorage.setItem(
       this.selectedScenarioKey,
@@ -83,18 +199,18 @@ export class ScenarioService {
   loadScenarioData(scenarioNumber: number): void {
     switch (scenarioNumber) {
       case 1:
-        this.activePatientScenario = patientScenario1;
-        this.activeMedicalHistories = medicalHistories1;
-        this.activeExaminations = examinations1;
-        this.activeLaboratories = laboratories1;
-        this.activeFollowUps = followups1;
+        this.activePatientScenario.set(patientScenario1);
+        this.activeMedicalHistories.set(medicalHistories1);
+        this.activeExaminations.set(examinations1);
+        this.activeLaboratories.set(laboratories1);
+        this.activeFollowUps.set(followups1);
         break;
       case 2:
-        this.activePatientScenario = patientScenario2;
-        this.activeMedicalHistories = medicalHistories2;
-        this.activeExaminations = examinations2;
-        this.activeLaboratories = laboratories2;
-        this.activeFollowUps = followups2;
+        this.activePatientScenario.set(patientScenario2);
+        this.activeMedicalHistories.set(medicalHistories2);
+        this.activeExaminations.set(examinations2);
+        this.activeLaboratories.set(laboratories2);
+        this.activeFollowUps.set(followups2);
         break;
       default:
         break;
@@ -106,23 +222,23 @@ export class ScenarioService {
   private saveScenarioData(): void {
     localStorage.setItem(
       this.patientScenarioKey,
-      JSON.stringify(this.activePatientScenario)
+      JSON.stringify(this.activePatientScenario())
     );
     localStorage.setItem(
       this.activeMedicalHistoriesKey,
-      JSON.stringify(this.activeMedicalHistories)
+      JSON.stringify(this.activeMedicalHistories())
     );
     localStorage.setItem(
       this.activeExaminationsKey,
-      JSON.stringify(this.activeExaminations)
+      JSON.stringify(this.activeExaminations())
     );
     localStorage.setItem(
       this.activeLaboratoriesKey,
-      JSON.stringify(this.activeLaboratories)
+      JSON.stringify(this.activeLaboratories())
     );
     localStorage.setItem(
       this.activeFollowUpsKey,
-      JSON.stringify(this.activeFollowUps)
+      JSON.stringify(this.activeFollowUps())
     );
   }
 
@@ -274,68 +390,15 @@ export class ScenarioService {
 
   /* Summary Methods */
   // Calculate the total cost of all selected items
-  getTotalCost(): number {
-    let medicalHistoryCost = this.getSelectedHistories().reduce(
-      (sum, item) => sum + item.behandlungskosten,
-      0
-    );
-    let examinationCost = this.getSelectedExaminations().reduce(
-      (sum, item) => sum + item.behandlungskosten,
-      0
-    );
-    let laboratoryCost = this.getSelectedLaboratories().reduce(
-      (sum, item) => sum + item.behandlungskosten,
-      0
-    );
-    let followUpCost = this.getSelectedFollowUps().reduce(
-      (sum, item) => sum + item.behandlungskosten,
-      0
-    );
-
-    return medicalHistoryCost + examinationCost + laboratoryCost + followUpCost;
+  getTotalCost() {
+    return this.totalCost;
   }
 
-  // Calculate the total doctor's time for all selected items
-  getTotalDoctorTime(): number {
-    let medicalHistoryTime = this.getSelectedHistories().reduce(
-      (sum, item) => sum + item.aerztlicheArbeitszeit,
-      0
-    );
-    let examinationTime = this.getSelectedExaminations().reduce(
-      (sum, item) => sum + item.aerztlicheArbeitszeit,
-      0
-    );
-    let laboratoryTime = this.getSelectedLaboratories().reduce(
-      (sum, item) => sum + item.aerztlicheArbeitszeit,
-      0
-    );
-    let followUpTime = this.getSelectedFollowUps().reduce(
-      (sum, item) => sum + item.aerztlicheArbeitszeit,
-      0
-    );
-
-    return medicalHistoryTime + examinationTime + laboratoryTime + followUpTime;
+  getTotalDoctorTime() {
+    return this.totalDoctorTime;
   }
 
-  // Calculate the total patient's time for all selected items
-  getTotalPatientTime(): number {
-    let medicalHistoryTime = this.getSelectedHistories().reduce(
-      (sum, item) => sum + item.behandlungszeit,
-      0
-    );
-    let examinationTime = this.getSelectedExaminations().reduce(
-      (sum, item) => sum + item.behandlungszeit,
-      0
-    );
-    let laboratoryTime = this.getSelectedLaboratories().reduce(
-      (sum, item) => sum + item.behandlungszeit,
-      0
-    );
-    let followUpTime = this.getSelectedFollowUps().reduce(
-      (sum, item) => sum + item.behandlungszeit,
-      0
-    );
-
-    return medicalHistoryTime + examinationTime + laboratoryTime + followUpTime;
+  getTotalPatientTime() {
+    return this.totalPatientTime;
   }
 }

@@ -1,0 +1,37 @@
+<div class="container">
+  <form (ngSubmit)="onSubmit()">
+    <div class="grid"></div>
+    <div class="team-name-section">
+      <h2>Bitte geben Sie Ihren Teamnamen ein:</h2>
+      <input
+        id="teamName"
+        type="text"
+        [(ngModel)]="teamNameValue"
+        name="teamName"
+        [placeholder]="teamPlaceholder()"
+      />
+    </div>
+    @if (teamName() && teamName().trim() !== '') {
+    <h2>Teammitglieder hinzufügen:</h2>
+    <div class="add-member">
+      <input
+        type="text"
+        [(ngModel)]="newMemberValue"
+        name="newMember"
+        placeholder="Teammitgliedsname"
+      />
+      <button type="button" (click)="addMember(newMember())">Hinzufügen</button>
+    </div>
+    } @for (member of teamMembers(); track $index) {
+    <ul class="member-list">
+      <li>
+        {{ member }}
+        <button type="button" (click)="removeMember(member)">Entfernen</button>
+      </li>
+    </ul>
+    }
+    @if (teamName() && teamName().trim() !== '' && teamMembers().length > 0) {
+    <button type="submit" class="submit-button">Weiter</button>
+    }
+  </form>
+</div>

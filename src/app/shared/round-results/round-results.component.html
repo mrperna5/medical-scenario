@@ -5,20 +5,14 @@
   <table class="results-table">
     <thead>
       <tr>
-        <th>Item</th>
-        <th>Cost (EURO)</th>
-        <th>Doctor Time (Min)</th>
-        <th>Patient Time (Min)</th>
-        <th>Description</th>
+        <th>Auswahl</th>
+        <th>Beschreibung</th>
       </tr>
     </thead>
     <tbody>
     @for (item of selectedItems(); track item.code) {
       <tr>
         <td>{{ item.item }}</td>
-        <td>{{ item.behandlungskosten | currency: 'EUR': 'symbol':'1.2-2' }}</td>
-        <td>{{ item.aerztlicheArbeitszeit }} Min</td>
-        <td>{{ item.behandlungszeit }} Min</td>
         <td>
           @if ( item.results && item.results.length > 0) {
           <ul>
@@ -34,10 +28,10 @@
   </table>
 
   <div class="totals">
-    <h3>Total Cost: <span>{{ getTotalCost() | currency: 'EUR': 'symbol':'1.2-2' }}</span></h3>
-    <h3>Total Doctor Time: <span>{{ getTotalDoctorTime() }} Min</span></h3>
-    <h3>Total Patient Time: <span>{{ getTotalPatientTime() }} Min</span></h3>
+    <h3>Gesamtkosten: <span>{{ getTotalCost() | currency: 'EUR': 'symbol':'1.2-2' }}</span></h3>
+    <h3>Gesamtzeit des Arztes: <span>{{ getTotalDoctorTime() }} Min</span></h3>
+    <h3>Gesamtzeit des Patienten: <span>{{ getTotalPatientTime() }} Min</span></h3>
   </div>
 </div>
 }
-<button [routerLink]="navigateTo()" class="submit-button">Make Diagnosis</button>
+<button [routerLink]="navigateTo()" class="submit-button">Weiter zur Diagnose</button>

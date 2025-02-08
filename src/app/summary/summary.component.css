@@ -12,6 +12,7 @@
   .summary-container h2, h3 {
       text-align: center;
       color: #333;
+      text-align: center;
     }
   
   .summary-card {
@@ -21,12 +22,21 @@
     margin-bottom: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
+
+  .summary-card th {
+    text-align: center;
+  }
+
+  .summary-card td {
+    text-align: center;
+  }
   
   .summary-card ul {
     list-style: none;
     padding: 0;
     margin: 20px auto;
     width: fit-content;
+    text-align: center;
   }
   
   .summary-card ul li {
@@ -35,4 +45,5 @@
     margin-bottom: 10px;
     border-radius: 5px;
     margin: 20px auto;
+    text-align: center;
   }

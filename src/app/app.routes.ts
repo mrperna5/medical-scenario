@@ -16,6 +16,7 @@ import { ScenarioComponent } from './scenario/scenario.component';
 import { IntroductionComponent } from './introduction/introduction.component';
 import { TitleComponent } from './title/title.component';
 import { GameRulesComponent } from './game-rules/game-rules.component';
+import { TeamManagementComponent } from './team-management/team-management.component';
 
 export const routes: Routes = [
     {
@@ -25,6 +26,10 @@ export const routes: Routes = [
     {
         path: 'title',
         component: TitleComponent
+    },
+    {
+        path: 'team-management',
+        component: TeamManagementComponent
     },
     {
         path: 'introduction',

@@ -6,16 +6,18 @@
     <h3>Patientenfall</h3>
     <p>{{ patientScenario.mysteryCase }}</p>
   </section>
-  } @if (patientScenario?.developments) {
+  } 
+  <!-- @if (patientScenario?.developments) {
   <section class="further-development">
     @for (development of patientScenario.developments; track $index) {
     <div>
       <h3>{{ development.stage }}</h3>
+       <h3></h3>
       <p>{{ development.description }}</p>
     </div>
     }
   </section>
-  }
+  } -->
   <button class="start-button" (click)="startScenario()">
     Starten Sie den Fall
   </button>

@@ -1,50 +1,44 @@
-<h2 class="title">Medical Scenario Summary for Team: {{ teamName }}</h2>
+<h2 class="title">Zusammenfassung des medizinischen Szenarios für das Team: {{ teamName() }}</h2>
 
-@if (selectedMedicalHistories.length > 0 || selectedExaminations.length > 0 ||
-selectedLaboratories.length > 0 || selectedFollowUps.length > 0) {
+@if (selectedMedicalHistories().length > 0 || selectedExaminations().length > 0 ||
+selectedLaboratories().length > 0 || selectedFollowUps().length > 0) {
 <div class="summary-container">
   <!-- Medical History Summary -->
   <div class="summary-card">
-    <h3>Medical History (Anamnese)</h3>
+    <h3>Anamnese</h3>
     <table class="results-table">
       <thead>
         <tr>
-          <th>Item</th>
-          <th>Cost (EURO)</th>
-          <th>Doctor Time (Min)</th>
-          <th>Patient Time (Min)</th>
+          <th>Auswahl</th>
         </tr>
       </thead>
       <tbody>
-        @for (item of selectedMedicalHistories; track item.code) {
+        @for (item of selectedMedicalHistories(); track item.code) {
         <tr>
           <td>{{ item.item }}</td>
-          <td>{{ item.behandlungskosten | currency : "EUR" }}</td>
-          <td>{{ item.aerztlicheArbeitszeit }} Min</td>
-          <td>{{ item.behandlungszeit }} Min</td>
         </tr>
         }
       </tbody>
     </table>
     <div class="totals">
       <h3>
-        Total Cost:
+        Gesamtkosten:
         <span>{{
-          getTotalCost(selectedMedicalHistories) | currency : "EUR"
+          getTotalCost(selectedMedicalHistories()) | currency : "EUR"
         }}</span>
       </h3>
       <h3>
-        Total Doctor Time:
-        <span>{{ getTotalDoctorTime(selectedMedicalHistories) }} Min</span>
+        Gesamtzeit des Arztes Anamnese:
+        <span>{{ getTotalDoctorTime(selectedMedicalHistories()) }} Min</span>
       </h3>
       <h3>
-        Total Patient Time:
-        <span>{{ getTotalPatientTime(selectedMedicalHistories) }} Min</span>
+        Gesamtzeit des Patienten Anamnese:
+        <span>{{ getTotalPatientTime(selectedMedicalHistories()) }} Min</span>
       </h3>
     </div>
-    <h3>Diagnosis Guesses:</h3>
+    <h3>Diagnose:</h3>
     <ul>
-      @for (guess of medicalHistoryDiagnosisGuesses; track $index) {
+      @for (guess of medicalHistoryDiagnosisGuesses(); track $index) {
       <li>{{ guess }}</li>
       }
     </ul>
@@ -52,44 +46,38 @@ selectedLaboratories.length > 0 || selectedFollowUps.length > 0) {
 
   <!-- Examinations Summary -->
   <div class="summary-card">
-    <h3>Examinations (Untersuchung)</h3>
+    <h3>Untersuchung</h3>
     <table class="results-table">
       <thead>
         <tr>
-          <th>Item</th>
-          <th>Cost (EURO)</th>
-          <th>Doctor Time (Min)</th>
-          <th>Patient Time (Min)</th>
+          <th>Auswahl</th>
         </tr>
       </thead>
       <tbody>
-        @for (item of selectedExaminations; track item.code) {
+        @for (item of selectedExaminations(); track item.code) {
         <tr>
           <td>{{ item.item }}</td>
-          <td>{{ item.behandlungskosten | currency : "EUR" }}</td>
-          <td>{{ item.aerztlicheArbeitszeit }} Min</td>
-          <td>{{ item.behandlungszeit }} Min</td>
         </tr>
         }
       </tbody>
     </table>
     <div class="totals">
       <h3>
-        Total Cost:
-        <span>{{ getTotalCost(selectedExaminations) | currency : "EUR" }}</span>
+        Gesamtkosten Untersuchung:
+        <span>{{ getTotalCost(selectedExaminations()) | currency : "EUR" }}</span>
       </h3>
       <h3>
-        Total Doctor Time:
-        <span>{{ getTotalDoctorTime(selectedExaminations) }} Min</span>
+        Gesamtzeit des Arztes:
+        <span>{{ getTotalDoctorTime(selectedExaminations()) }} Min</span>
       </h3>
       <h3>
-        Total Patient Time:
-        <span>{{ getTotalPatientTime(selectedExaminations) }} Min</span>
+        Gesamtzeit des Patienten:
+        <span>{{ getTotalPatientTime(selectedExaminations()) }} Min</span>
       </h3>
     </div>
     <h3>Diagnosis Guesses:</h3>
     <ul>
-      @for (guess of examinationDiagnosisGuesses; track $index) {
+      @for (guess of examinationDiagnosisGuesses(); track $index) {
       <li>{{ guess }}</li>
       }
     </ul>
@@ -97,44 +85,38 @@ selectedLaboratories.length > 0 || selectedFollowUps.length > 0) {
 
   <!-- Laboratories Summary -->
   <div class="summary-card">
-    <h3>Laboratories (Labordiagnostik)</h3>
+    <h3>Labordiagnostik</h3>
     <table class="results-table">
       <thead>
         <tr>
-          <th>Item</th>
-          <th>Cost (EURO)</th>
-          <th>Doctor Time (Min)</th>
-          <th>Patient Time (Min)</th>
+          <th>Auswahl</th>
         </tr>
       </thead>
       <tbody>
-        @for (item of selectedLaboratories; track item.code) {
+        @for (item of selectedLaboratories(); track item.code) {
         <tr>
           <td>{{ item.item }}</td>
-          <td>{{ item.behandlungskosten | currency : "EUR" }}</td>
-          <td>{{ item.aerztlicheArbeitszeit }} Min</td>
-          <td>{{ item.behandlungszeit }} Min</td>
         </tr>
         }
       </tbody>
     </table>
     <div class="totals">
       <h3>
-        Total Cost:
-        <span>{{ getTotalCost(selectedLaboratories) | currency : "EUR" }}</span>
+        Gesamtkosten:
+        <span>{{ getTotalCost(selectedLaboratories()) | currency : "EUR" }}</span>
       </h3>
       <h3>
-        Total Doctor Time:
-        <span>{{ getTotalDoctorTime(selectedLaboratories) }} Min</span>
+        Gesamtzeit des Arztes:
+        <span>{{ getTotalDoctorTime(selectedLaboratories()) }} Min</span>
       </h3>
       <h3>
-        Total Patient Time:
-        <span>{{ getTotalPatientTime(selectedLaboratories) }} Min</span>
+        Gesamtzeit des Patienten:
+        <span>{{ getTotalPatientTime(selectedLaboratories()) }} Min</span>
       </h3>
     </div>
     <h3>Diagnosis Guesses:</h3>
     <ul>
-      @for (guess of laboratoryDiagnosisGuesses; track $index) {
+      @for (guess of laboratoryDiagnosisGuesses(); track $index) {
       <li>{{ guess }}</li>
       }
     </ul>
@@ -142,44 +124,38 @@ selectedLaboratories.length > 0 || selectedFollowUps.length > 0) {
 
   <!-- FollowUps Summary -->
   <div class="summary-card">
-    <h3>Follow-Ups (Weitere Diagnostik)</h3>
+    <h3>Weitere Diagnostik</h3>
     <table class="results-table">
       <thead>
         <tr>
-          <th>Item</th>
-          <th>Cost (EURO)</th>
-          <th>Doctor Time (Min)</th>
-          <th>Patient Time (Min)</th>
+          <th>Auswahl</th>
         </tr>
       </thead>
       <tbody>
-        @for (item of selectedFollowUps; track item.code) {
+        @for (item of selectedFollowUps(); track item.code) {
         <tr>
           <td>{{ item.item }}</td>
-          <td>{{ item.behandlungskosten | currency : "EUR" }}</td>
-          <td>{{ item.aerztlicheArbeitszeit }} Min</td>
-          <td>{{ item.behandlungszeit }} Min</td>
         </tr>
         }
       </tbody>
     </table>
     <div class="totals">
       <h3>
-        Total Cost:
-        <span>{{ getTotalCost(selectedFollowUps) | currency : "EUR" }}</span>
+        Gesamtkosten Weitere Diagnostik:
+        <span>{{ getTotalCost(selectedFollowUps()) | currency : "EUR" }}</span>
       </h3>
       <h3>
-        Total Doctor Time:
-        <span>{{ getTotalDoctorTime(selectedFollowUps) }} Min</span>
+        Gesamtzeit des Arztes Weitere Diagnostik:
+        <span>{{ getTotalDoctorTime(selectedFollowUps()) }} Min</span>
       </h3>
       <h3>
-        Total Patient Time:
-        <span>{{ getTotalPatientTime(selectedFollowUps) }} Min</span>
+        Gesamtzeit des Patienten Weitere Diagnostik:
+        <span>{{ getTotalPatientTime(selectedFollowUps()) }} Min</span>
       </h3>
     </div>
     <h3>Diagnosis Guesses:</h3>
     <ul>
-      @for (guess of followUpDiagnosisGuesses; track $index) {
+      @for (guess of followUpDiagnosisGuesses(); track $index) {
       <li>{{ guess }}</li>
       }
     </ul>
@@ -188,14 +164,14 @@ selectedLaboratories.length > 0 || selectedFollowUps.length > 0) {
   <!-- Overall Totals -->
   <div class="totals">
     <h3>
-      Overall Total Cost:
+      Gesamtkosten:
       <span>{{ getTotalOverallCost() | currency : "EUR" }}</span>
     </h3>
     <h3>
       Overall Doctor Time: <span>{{ getTotalOverallDoctorTime() }} Min</span>
     </h3>
     <h3>
-      Overall Patient Time: <span>{{ getTotalOverallPatientTime() }} Min</span>
+      Gesamtzeit des Patienten: <span>{{ getTotalOverallPatientTime() }} Min</span>
     </h3>
   </div>
 </div>

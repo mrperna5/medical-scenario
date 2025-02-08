@@ -68,7 +68,7 @@ form {
 }
 
 .results-table th {
-  background-color: #4caf50;
+  background-color: #008db8;
   color: white;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -124,5 +124,5 @@ form {
 }
 
 .submit-button:hover {
-  background-color: #388e3c;
+  background-color: #00a3d1;
 }
