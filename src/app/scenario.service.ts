@@ -37,7 +37,8 @@ export class ScenarioService {
   private activeLaboratoriesKey = 'activeLaboratories';
   private activeFollowUpsKey = 'activeFollowUps';
 
-  private lockedRoundsKey = 'lockedRounds';
+  private lockedPhasesKey = 'lockedPhases';
+  private lockedPhases = signal<{ [phaseName: string]: boolean }>({});
 
   private activePatientScenario = signal<any>(null);
   private activeMedicalHistories = signal<MedicalOption[]>([]);
@@ -111,25 +112,24 @@ export class ScenarioService {
   });
 
   constructor() {
-    const locks = localStorage.getItem(this.lockedRoundsKey);
+    // Load existing locks (selection & diagnosis) from local storage
+    const locks = localStorage.getItem(this.lockedPhasesKey);
     if (locks) {
-      this.lockedRounds.set(JSON.parse(locks));
+      this.lockedPhases.set(JSON.parse(locks));
     }
   }
 
   /* Introduction Methods*/
-  public lockRound(roundName: string): void {
-
-    const currentLocks = this.lockedRounds();
-    const updatedLocks = { ...currentLocks, [roundName]: true };
-    this.lockedRounds.set(updatedLocks);
-
-    localStorage.setItem(this.lockedRoundsKey, JSON.stringify(updatedLocks));
+  public lockPhase(phaseName: string): void {
+    const currentLocks = this.lockedPhases();
+    const updatedLocks = { ...currentLocks, [phaseName]: true };
+    this.lockedPhases.set(updatedLocks);
+    localStorage.setItem(this.lockedPhasesKey, JSON.stringify(updatedLocks));
   }
 
-  public isRoundLocked(roundName: string): boolean {
-    const currentLocks = this.lockedRounds();
-    return !!currentLocks[roundName]; 
+  public isPhaseLocked(phaseName: string): boolean {
+    const currentLocks = this.lockedPhases();
+    return !!currentLocks[phaseName];
   }
 
   saveTeamName(teamName: string): void {

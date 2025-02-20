@@ -27,7 +27,6 @@
   padding-bottom: 5px;
 }
 
-
 /* ------------------------- */
 /*  Title Styling */
 /* ------------------------- */
@@ -39,6 +38,9 @@
   color: #333;
 }
 
+/* ------------------------- */
+/*  Form Styling */
+/* ------------------------- */
 form {
   max-width: 600px;
   margin: 20px auto;
@@ -56,7 +58,6 @@ form {
   border-collapse: collapse;
   margin: 20px auto;
   font-family: "Helvetica Neue", Arial, sans-serif;
-  width: 100%;
   max-width: 800px;
 }
 
@@ -64,7 +65,7 @@ form {
 .results-table td {
   border: 1px solid #ddd;
   padding: 12px;
-  text-align: left;
+  text-align: left; 
 }
 
 .results-table th {
@@ -83,20 +84,29 @@ form {
   background-color: #ddd;
 }
 
+/* ------------------------- */
+/* Totals (shared styling) */
+/* ------------------------- */
 .totals {
   display: flex;
   justify-content: space-between;
-  padding: 10px;
+  align-items: center;
+  padding: 20px;
   background-color: #e0f7fa;
   border-radius: 5px;
   font-weight: bold;
   font-family: "Helvetica Neue", Arial, sans-serif;
-  width: 100%;
   max-width: 800px;
   margin: 20px auto;
 }
 
+.total-item {
+  flex: 1;  
+  text-align: center; 
+}
+
 .totals h3 {
+  margin: 0;
   font-size: 18px;
   color: #333;
 }
@@ -105,6 +115,8 @@ form {
   font-weight: bold;
   color: #00796b;
 }
+
+
 
 /* ------------------------- */
 /* Button Styling */
@@ -121,6 +133,7 @@ form {
   text-align: center;
   font-family: "Helvetica Neue", Arial, sans-serif;
   cursor: pointer;
+  transition: background-color 0.3s ease; 
 }
 
 .submit-button:hover {

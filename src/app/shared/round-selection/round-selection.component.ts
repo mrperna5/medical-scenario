@@ -26,7 +26,7 @@ export class RoundSelectionComponent implements OnInit {
   private router = inject(Router);
 
   ngOnInit() {
-    this.isLocked = this.scenarioService.isRoundLocked(this.roundName());
+    this.isLocked = this.scenarioService.isPhaseLocked(this.roundName() + '-selection');
 
     let previouslySelectedItems: MedicalOption[] = [];
     switch (this.roundName()) {
@@ -65,6 +65,12 @@ export class RoundSelectionComponent implements OnInit {
       const selectedItems = this.items().filter(
         (item) => this.selectedItemsMap[item.code]
       );
+
+      if (selectedItems.length === 0) {
+        alert('Bitte wählen Sie mindestens ein Kästchen aus, bevor Sie fortfahren.');
+        return;
+      }
+
       switch (this.roundName()) {
         case 'medical-history':
           this.scenarioService.saveSelectedHistories(selectedItems);
@@ -82,7 +88,7 @@ export class RoundSelectionComponent implements OnInit {
           throw new Error('Invalid round name');
       }
   
-      this.scenarioService.lockRound(this.roundName());
+      this.scenarioService.lockPhase(this.roundName() + '-selection');
       this.isLocked = true;
   
       if (this.navigateTo()) {

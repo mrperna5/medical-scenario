@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ScenarioService } from '../scenario.service';
 
@@ -13,7 +13,9 @@ export class ScenarioComponent implements OnInit{
   patientScenario: any;
   scenarioNumber!: number;
 
-  constructor(private scenarioService: ScenarioService, private router: Router) { }
+  private router = inject(Router);
+
+  constructor(private scenarioService: ScenarioService) { }
 
   ngOnInit(): void {
     this.patientScenario = this.scenarioService.getPatientScenario();

@@ -1,7 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ScenarioService } from '../scenario.service';
 import { CommonModule } from '@angular/common';
 import { MedicalOption } from '../scenario/scenario-data/medical-option.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-summary',
@@ -10,8 +11,9 @@ import { MedicalOption } from '../scenario/scenario-data/medical-option.model';
   templateUrl: './summary.component.html',
   styleUrl: './summary.component.css',
 })
-export class SummaryComponent {
+export class SummaryComponent implements OnInit {
   teamName = signal<string>('');
+  teamMembers = signal<string[]>([]);
   selectedMedicalHistories = signal<MedicalOption[]>([]);
   selectedExaminations = signal<MedicalOption[]>([]);
   selectedLaboratories = signal<MedicalOption[]>([]);
@@ -22,14 +24,28 @@ export class SummaryComponent {
   laboratoryDiagnosisGuesses = signal<string[]>([]);
   followUpDiagnosisGuesses = signal<string[]>([]);
 
+  private router = inject(Router);
+
   constructor(private scenarioService: ScenarioService) {}
 
   ngOnInit(): void {
-    this.teamName.set(this.scenarioService.getTeamName());
+    const currentTeamName = this.scenarioService.getTeamName();
+    this.teamName.set(currentTeamName);
+    const members = this.scenarioService.getTeamMembers(currentTeamName);
+    this.teamMembers.set(members);
 
-    this.selectedMedicalHistories.set(this.scenarioService.getSelectedHistories());
-    this.selectedExaminations.set(this.scenarioService.getSelectedExaminations());
-    this.selectedLaboratories.set(this.scenarioService.getSelectedLaboratories());
+    console.log('TEAM NAME =>', currentTeamName);
+    console.log('TEAM MEMBERS =>', members);
+
+    this.selectedMedicalHistories.set(
+      this.scenarioService.getSelectedHistories()
+    );
+    this.selectedExaminations.set(
+      this.scenarioService.getSelectedExaminations()
+    );
+    this.selectedLaboratories.set(
+      this.scenarioService.getSelectedLaboratories()
+    );
     this.selectedFollowUps.set(this.scenarioService.getSelectedFollowUps());
 
     this.medicalHistoryDiagnosisGuesses.set(
@@ -44,9 +60,6 @@ export class SummaryComponent {
     this.followUpDiagnosisGuesses.set(
       this.scenarioService.getFollowUpsDiagnosisGuesses()
     );
-
-      console.log(this.selectedMedicalHistories)
-      console.log(this.medicalHistoryDiagnosisGuesses)
   }
 
   // Calculate total cost for a given set of medical options
@@ -90,5 +103,27 @@ export class SummaryComponent {
       this.getTotalPatientTime(this.selectedLaboratories()) +
       this.getTotalPatientTime(this.selectedFollowUps())
     );
+  }
+
+  getAllItems() {
+    return [
+      ...this.selectedMedicalHistories().map((i) => ({ section: 'Anamnese', item: i })),
+      ...this.selectedExaminations().map((i) => ({ section: 'Untersuchung', item: i })),
+      ...this.selectedLaboratories().map((i) => ({ section: 'Labordiagnostik', item: i })),
+      ...this.selectedFollowUps().map((i) => ({ section: 'Weitere Diagnostik', item: i })),
+    ];
+  }
+  
+
+  printThenRestart() {
+    const afterPrint = () => {
+      // Navigate to the start page after the print dialog closes
+      this.router.navigate(['/title']);
+      window.removeEventListener('afterprint', afterPrint);
+    };
+    window.addEventListener('afterprint', afterPrint);
+
+    // Show print dialog
+    window.print();
   }
 }

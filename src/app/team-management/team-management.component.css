@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
   }
 
   .grid {
@@ -15,9 +16,8 @@
     flex-direction: column;
     align-items: center;
     margin: 20px auto;
-    max-width: 400px;
+    max-width: 600px;
     text-align: center;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
 .team-name-section input {

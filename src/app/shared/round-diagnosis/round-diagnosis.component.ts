@@ -1,4 +1,4 @@
-import { Component, inject, input, model } from '@angular/core';
+import { Component, inject, input, model, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ScenarioService } from '../../scenario.service';
 import { FormsModule } from '@angular/forms';
@@ -10,22 +10,69 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './round-diagnosis.component.html',
   styleUrl: './round-diagnosis.component.css',
 })
-export class RoundDiagnosisComponent {
+export class RoundDiagnosisComponent implements OnInit {
   guesses = model.required<string[]>();
-  roundName = input.required<'medical-history' | 'laboratory' | 'examination' | 'follow-up'>()
+  roundName = input.required<
+    'medical-history' | 'laboratory' | 'examination' | 'follow-up'
+  >();
 
-  navigateto = input.required<string>()
+  navigateto = input.required<string>();
   private router = inject(Router);
+
+  isLocked = false;
 
   constructor(private scenarioService: ScenarioService) {}
 
+  ngOnInit(): void {
+    this.isLocked = this.scenarioService.isPhaseLocked(
+      this.roundName() + '-diagnosis'
+    );
+
+    let savedGuesses: string[] = [];
+    switch (this.roundName()) {
+      case 'medical-history':
+        savedGuesses = this.scenarioService.getMedicalHistoryDiagnosisGuesses();
+        break;
+      case 'laboratory':
+        savedGuesses = this.scenarioService.getLaboratoryDiagnosisGuesses();
+        break;
+      case 'examination':
+        savedGuesses = this.scenarioService.getExaminationDiagnosisGuesses();
+        break;
+      case 'follow-up':
+        savedGuesses = this.scenarioService.getFollowUpsDiagnosisGuesses();
+        break;
+      default:
+        throw new Error('Invalid round name');
+    }
+
+    if (savedGuesses?.length) {
+      this.guesses.set(savedGuesses);
+    }
+  }
+
   onSubmit(): void {
+    if (this.isLocked) {
+      if (this.navigateto()) {
+        this.router.navigate([this.navigateto()]);
+      }
+      return;
+    }
+
     const filteredGuesses = this.guesses().filter(
       (guess) => guess.trim() !== ''
     );
+
+    if (filteredGuesses.length === 0) {
+      alert('Bitte geben Sie mindestens eine Diagnose ein, bevor Sie fortfahren.');
+      return;
+    }
+    
     switch (this.roundName()) {
       case 'medical-history':
-        this.scenarioService.saveMedicalHistoryDiagnosisGuesses(filteredGuesses);
+        this.scenarioService.saveMedicalHistoryDiagnosisGuesses(
+          filteredGuesses
+        );
         break;
       case 'laboratory':
         this.scenarioService.saveLaboratoryDiagnosisGuesses(filteredGuesses);
@@ -40,6 +87,11 @@ export class RoundDiagnosisComponent {
         throw new Error('Invalid round name');
     }
 
-    this.router.navigate([this.navigateto()]);
+    this.scenarioService.lockPhase(this.roundName() + '-diagnosis');
+    this.isLocked = true;
+
+    if (this.navigateto()) {
+      this.router.navigate([this.navigateto()]);
+    }
   }
 }
