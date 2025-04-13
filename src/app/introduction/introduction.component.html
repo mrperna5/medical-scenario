@@ -13,16 +13,18 @@
   <form (ngSubmit)="onSubmit()">
     <div class="grid">
       @for (case of cases; track $index) {
-      <button
-        class="scenario-button"
-        type="button"
-        [class.selected]="selectedScenarioId === $index + 1"
-        (click)="selectScenario($index + 1)"
-      >
-        {{ case }}
-      </button>
+        <button
+          class="scenario-button"
+          type="button"
+          [class.selected]="selectedScenarioId === $index + 1"
+          [disabled]="!isUnlocked($index)"
+          (click)="selectScenario($index + 1)"
+        >
+          {{ case }}
+        </button>
       }
     </div>
+    
     @if (selectedScenarioId) {
     <button
       type="submit"

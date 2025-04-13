@@ -1,0 +1,26 @@
+<h2>Teamübersicht</h2>
+<table class="summary-table">
+  <thead>
+    <tr>
+      <th>Team</th>
+      <th>Diagnose</th>
+      <th>Therapie</th>
+      <th>Kosten</th>
+      <th>Arztzeit</th>
+      <th>Patientenzeit</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (summary of summaries(); track summary.teamName) {
+      <tr>
+        <td>{{ summary.teamName }}</td>
+        <td>{{ summary.finalDiagnosis }}</td>
+        <td>{{ summary.finalTherapy }}</td>
+        <td>{{ summary.totalCost }}</td>
+        <td>{{ summary.totalDoctorTime }}</td>
+        <td>{{ summary.totalPatientTime }}</td>
+      </tr>
+    }
+  </tbody>
+</table>
+

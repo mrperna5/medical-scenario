@@ -17,6 +17,9 @@ import { IntroductionComponent } from './introduction/introduction.component';
 import { TitleComponent } from './title/title.component';
 import { GameRulesComponent } from './game-rules/game-rules.component';
 import { TeamManagementComponent } from './team-management/team-management.component';
+import { AdminComponent } from './admin/admin.component';
+import { ScenarioControlComponent } from './admin/scenario-control/scenario-control.component';
+import { TeamSummaryComponent } from './admin/team-summary/team-summary.component';
 
 export const routes: Routes = [
     {
@@ -30,6 +33,18 @@ export const routes: Routes = [
     {
         path: 'team-management',
         component: TeamManagementComponent
+    },
+    {
+        path: 'admin',
+        component: AdminComponent
+    },
+    {
+        path: 'admin/scenario-control',
+        component: ScenarioControlComponent
+    },
+    {
+        path: 'admin/final',
+        component: TeamSummaryComponent
     },
     {
         path: 'introduction',

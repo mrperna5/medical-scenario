@@ -3,6 +3,7 @@ import { ScenarioService } from '../scenario.service';
 import { CommonModule } from '@angular/common';
 import { MedicalOption } from '../scenario/scenario-data/medical-option.model';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-summary',
@@ -25,6 +26,7 @@ export class SummaryComponent implements OnInit {
   followUpDiagnosisGuesses = signal<string[]>([]);
 
   private router = inject(Router);
+  private http = inject(HttpClient);
 
   constructor(private scenarioService: ScenarioService) {}
 
@@ -113,8 +115,30 @@ export class SummaryComponent implements OnInit {
       ...this.selectedFollowUps().map((i) => ({ section: 'Weitere Diagnostik', item: i })),
     ];
   }
+
+
+  saveSummaryToBackend(): void {
+    const payload = {
+      teamName: this.teamName(),
+      finalDiagnosis: this.followUpDiagnosisGuesses()[0] || '',
+      finalTherapy: this.followUpDiagnosisGuesses()[1] || '',
+      totalCost: this.getTotalOverallCost(),
+      totalDoctorTime: this.getTotalOverallDoctorTime(),
+      totalPatientTime: this.getTotalOverallPatientTime(),
+    };
+
+    this.http.post('/api/summary', payload).subscribe({
+      next: () => console.log('Summary saved successfully'),
+      error: (err) => console.error('Error saving summary:', err),
+    });
+  }
   
 
+  saveToBackend() {
+    this.saveSummaryToBackend();
+  }
+
+  
   printThenRestart() {
     const afterPrint = () => {
       // Navigate to the start page after the print dialog closes

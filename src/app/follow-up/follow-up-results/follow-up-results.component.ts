@@ -9,7 +9,7 @@ import { RoundResultsComponent } from "../../shared/round-results/round-results.
 @Component({
   selector: 'app-follow-up-results',
   standalone: true,
-  imports: [CommonModule, RouterLink, RoundResultsComponent],
+  imports: [CommonModule, RoundResultsComponent],
   templateUrl: './follow-up-results.component.html',
   styleUrl: './follow-up-results.component.css'
 })
