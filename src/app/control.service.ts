@@ -9,6 +9,7 @@ import { TeamSummary } from './scenario/scenario-data/team-summary.model';
 export class ControlService {
   private http = inject(HttpClient);
   private passwords = signal<Record<string, string>>({});
+  private selectedSummaries = signal<TeamSummary[]>([]);
 
   loadPasswords() {
     this.http.get<Record<string, string>>('/passwords.json').subscribe({
@@ -30,7 +31,7 @@ export class ControlService {
   getAllControls(): Observable<{ id: number; unlocked: boolean }[]> {
     return this.http.get<{ id: number; unlocked: boolean }[]>('/api/control');
   }
-  
+
   updateControl(id: number, unlocked: boolean): Observable<{ id: number; unlocked: boolean }> {
     return this.http.post<{ id: number; unlocked: boolean }>(`/api/control/${id}?unlocked=${unlocked}`, {});
   }
@@ -38,6 +39,14 @@ export class ControlService {
   getAllSummaries(): Observable<TeamSummary[]> {
     return this.http.get<TeamSummary[]>('/api/summary');
   }
-  
-  
+
+  setSelectedSummaries(summaries: TeamSummary[]) {
+    this.selectedSummaries.set(summaries);
+  }
+
+  getSelectedSummaries() {
+    return this.selectedSummaries;
+  }
+
+
 }

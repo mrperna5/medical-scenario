@@ -1,26 +1,72 @@
 <h2>Teamübersicht</h2>
-<table class="summary-table">
-  <thead>
-    <tr>
-      <th>Team</th>
-      <th>Diagnose</th>
-      <th>Therapie</th>
-      <th>Kosten</th>
-      <th>Arztzeit</th>
-      <th>Patientenzeit</th>
-    </tr>
-  </thead>
-  <tbody>
-    @for (summary of summaries(); track summary.teamName) {
-      <tr>
-        <td>{{ summary.teamName }}</td>
-        <td>{{ summary.finalDiagnosis }}</td>
-        <td>{{ summary.finalTherapy }}</td>
-        <td>{{ summary.totalCost }}</td>
-        <td>{{ summary.totalDoctorTime }}</td>
-        <td>{{ summary.totalPatientTime }}</td>
-      </tr>
-    }
-  </tbody>
-</table>
 
+<p-table
+  [value]="summaries()"
+  [(selection)]="selectedSummaries"
+  selectionMode="multiple"
+  dataKey="teamName"
+  [paginator]="true"
+  [rows]="10"
+  sortMode="multiple"
+  class="custom-summary-table"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 3em">
+        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+      </th>
+      <th pSortableColumn="scenarioId">
+        Fallnummer <p-sortIcon field="scenarioId"></p-sortIcon>
+      </th>
+      <th pSortableColumn="teamName">
+        Team <p-sortIcon field="teamName"></p-sortIcon>
+      </th>
+      <th>Mitglieder</th>
+      <th pSortableColumn="finalDiagnosis">
+        Diagnose <p-sortIcon field="finalDiagnosis"></p-sortIcon>
+      </th>
+      <th pSortableColumn="finalTherapy">
+        Therapie <p-sortIcon field="finalTherapy"></p-sortIcon>
+      </th>
+      <th pSortableColumn="totalCost">
+        Kosten <p-sortIcon field="totalCost"></p-sortIcon>
+      </th>
+      <th pSortableColumn="totalDoctorTime">
+        Arztzeit <p-sortIcon field="totalDoctorTime"></p-sortIcon>
+      </th>
+      <th pSortableColumn="totalPatientTime">
+        Patientenzeit <p-sortIcon field="totalPatientTime"></p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-summary>
+    <tr [pSelectableRow]="summary">
+      <td>
+        <p-tableCheckbox [value]="summary"></p-tableCheckbox>
+      </td>
+      <td>{{ summary.scenarioId }}</td>
+      <td>{{ summary.teamName }}</td>
+      <td>{{ summary.teamMembers.join(', ') }}</td>
+      <td>{{ summary.finalDiagnosis }}</td>
+      <td>{{ summary.finalTherapy }}</td>
+      <td>{{ summary.totalCost | currency:'EUR':'symbol':'1.2-2' }}</td>
+      <td>{{ summary.totalDoctorTime }} min</td>
+      <td>{{ summary.totalPatientTime }} min</td>
+    </tr>
+  </ng-template>
+</p-table>
+
+
+
+<button
+  class="submit-button"
+  [disabled]="selectedSummaries().length === 0"
+  (click)="goToSelected()"
+>
+  Auswahl anzeigen
+</button>
+
+<button routerLink="/admin" class="submit-button" style="margin-top: 2rem;">
+  Zurück
+</button>

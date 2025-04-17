@@ -1,10 +1,13 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ControlService } from '../../control.service';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-scenario-control',
   standalone: true,
-  imports: [],
+    imports: [
+        RouterLink
+    ],
   templateUrl: './scenario-control.component.html',
   styleUrl: './scenario-control.component.css'
 })

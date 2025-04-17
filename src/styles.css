@@ -65,7 +65,7 @@ form {
 .results-table td {
   border: 1px solid #ddd;
   padding: 12px;
-  text-align: left; 
+  text-align: left;
 }
 
 .results-table th {
@@ -101,8 +101,8 @@ form {
 }
 
 .total-item {
-  flex: 1;  
-  text-align: center; 
+  flex: 1;
+  text-align: center;
 }
 
 .totals h3 {
@@ -133,9 +133,76 @@ form {
   text-align: center;
   font-family: "Helvetica Neue", Arial, sans-serif;
   cursor: pointer;
-  transition: background-color 0.3s ease; 
+  transition: background-color 0.3s ease;
 }
 
 .submit-button:hover {
   background-color: #00a3d1;
+}
+
+
+
+/* Apply global styles to override PrimeNG defaults */
+.custom-summary-table .p-datatable {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Helvetica Neue', sans-serif;
+  background-color: #fff;
+}
+
+/* Header */
+.custom-summary-table .p-datatable-thead > tr > th {
+  background-color: #008db8;
+  color: white;
+  font-weight: bold;
+  padding: 15px 20px;
+  text-align: center;
+  border: none;
+}
+
+/* Body */
+.custom-summary-table .p-datatable-tbody > tr > td {
+  padding: 15px 20px;
+  text-align: center;
+  font-size: 0.95em;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Hover effect */
+.custom-summary-table .p-datatable-tbody > tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Remove last row's bottom border */
+.custom-summary-table .p-datatable-tbody > tr:last-child > td {
+  border-bottom: none;
+}
+
+.p-paginator {
+  justify-content: center;
+  margin-top: 1rem;
+  gap: 12px;
+  font-size: 1rem;
+}
+
+/* Space out the page number buttons */
+.p-paginator-pages .p-paginator-page {
+  margin: 0 6px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+/* Hover effect */
+.p-paginator .p-paginator-pages .p-paginator-page:not(.p-highlight):hover {
+  background-color: #e0f7fa;
+  color: #007b8a;
+}
+
+/* Active (highlighted) page */
+.p-paginator .p-paginator-page.p-highlight {
+  background-color: #008db8 !important;
+  color: white !important;
+  font-weight: bold;
 }

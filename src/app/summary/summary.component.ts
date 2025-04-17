@@ -4,15 +4,18 @@ import { CommonModule } from '@angular/common';
 import { MedicalOption } from '../scenario/scenario-data/medical-option.model';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { Dialog } from "primeng/dialog";
+import { Button } from "primeng/button";
 
 @Component({
   selector: 'app-summary',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, Dialog, Button],
   templateUrl: './summary.component.html',
   styleUrl: './summary.component.css',
 })
 export class SummaryComponent implements OnInit {
+  scenarioId = signal<number>(0);
   teamName = signal<string>('');
   teamMembers = signal<string[]>([]);
   selectedMedicalHistories = signal<MedicalOption[]>([]);
@@ -25,19 +28,20 @@ export class SummaryComponent implements OnInit {
   laboratoryDiagnosisGuesses = signal<string[]>([]);
   followUpDiagnosisGuesses = signal<string[]>([]);
 
+  confirmationDialogVisible = signal<boolean>(false);
+
   private router = inject(Router);
   private http = inject(HttpClient);
 
   constructor(private scenarioService: ScenarioService) {}
 
   ngOnInit(): void {
+    const currentScenarioId = this.scenarioService.getSelectedScenario();
+    this.scenarioId.set(currentScenarioId);
     const currentTeamName = this.scenarioService.getTeamName();
     this.teamName.set(currentTeamName);
-    const members = this.scenarioService.getTeamMembers(currentTeamName);
-    this.teamMembers.set(members);
-
-    console.log('TEAM NAME =>', currentTeamName);
-    console.log('TEAM MEMBERS =>', members);
+    const currentTeamMembers = this.scenarioService.getTeamMembers(currentTeamName);
+    this.teamMembers.set(currentTeamMembers);
 
     this.selectedMedicalHistories.set(
       this.scenarioService.getSelectedHistories()
@@ -119,7 +123,9 @@ export class SummaryComponent implements OnInit {
 
   saveSummaryToBackend(): void {
     const payload = {
+      scenarioId: this.scenarioId(),
       teamName: this.teamName(),
+      teamMembers: this.teamMembers(),
       finalDiagnosis: this.followUpDiagnosisGuesses()[0] || '',
       finalTherapy: this.followUpDiagnosisGuesses()[1] || '',
       totalCost: this.getTotalOverallCost(),
@@ -128,26 +134,21 @@ export class SummaryComponent implements OnInit {
     };
 
     this.http.post('/api/summary', payload).subscribe({
-      next: () => console.log('Summary saved successfully'),
+      next: () => {
+        console.log('Summary saved successfully');
+        this.confirmationDialogVisible.set(true)
+      },
       error: (err) => console.error('Error saving summary:', err),
     });
   }
-  
+
+  onConfirmationDialogClose(): void {
+    this.confirmationDialogVisible.set(false);
+    this.router.navigate(['/title']);
+  }
+
 
   saveToBackend() {
     this.saveSummaryToBackend();
-  }
-
-  
-  printThenRestart() {
-    const afterPrint = () => {
-      // Navigate to the start page after the print dialog closes
-      this.router.navigate(['/title']);
-      window.removeEventListener('afterprint', afterPrint);
-    };
-    window.addEventListener('afterprint', afterPrint);
-
-    // Show print dialog
-    window.print();
   }
 }

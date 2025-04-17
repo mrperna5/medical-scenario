@@ -210,105 +210,22 @@
   </div>
   }
 
+  <p-dialog
+    header="Szenario gespeichert"
+    [(visible)]="confirmationDialogVisible"
+    [modal]="true"
+    [closable]="false"
+    [dismissableMask]="false"
+    [style]="{ width: '30vw' }"
+  >
+    <p>Gut gemacht! Das Szenario wurde erfolgreich gespeichert.</p>
+    <div class="dialog-footer">
+      <p-button label="OK" (click)="onConfirmationDialogClose()" />
+    </div>
+  </p-dialog>
+
   <!-- <button class="submit-button" (click)="printThenRestart()"> -->
   <button class="submit-button" (click)="saveToBackend()">
-    Drucken and restart
+    Szenario abschließen
   </button>
-</div>
-
-<div class="print-layout">
-  <h2 class="title">
-    Kompakte Zusammenfassung für das Team: {{ teamName() }}
-  </h2>
-
-  <div class="print-team-card">
-    <h3>Teammitglieder:</h3>
-    <ul>
-      @for (member of teamMembers(); track $index) {
-        <li>{{ member }}</li>
-      }
-    </ul>
-  </div>
-
-  <!-- One approach is to have a single table for ALL items, with a "section" column. -->
-  <table class="results-table">
-    <thead>
-      <tr>
-        <th>Bereich</th>
-        <th>Auswahl</th>
-        <th>Kosten</th>
-        <th>Arztzeit</th>
-        <th>Patientenzeit</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (row of getAllItems(); track $index) {
-      <tr>
-        <td>{{ row.section }}</td>
-        <td>{{ row.item.item }}</td>
-        <td>{{ row.item.behandlungskosten | currency:'EUR' }}</td>
-        <td>{{ row.item.aerztlicheArbeitszeit }} Min</td>
-        <td>{{ row.item.behandlungszeit }} Min</td>
-      </tr>
-    }
-    </tbody>
-  </table>
-
-  <!-- Totals -->
-  <div class="totals">
-    <div class="total-item">
-      <h3>Gesamtkosten</h3>
-      <span>{{ getTotalOverallCost() | currency:'EUR' }}</span>
-    </div>
-    <div class="total-item">
-      <h3>Gesamtzeit (Arzt)</h3>
-      <span>{{ getTotalOverallDoctorTime() }} Min</span>
-    </div>
-    <div class="total-item">
-      <h3>Gesamtzeit (Patient)</h3>
-      <span>{{ getTotalOverallPatientTime() }} Min</span>
-    </div>
-  </div>
-
-  <!-- Diagnosis Guesses per round (optional) -->
-  <div class="print-guesses">
-    <h3>Anamnese Diagnoses</h3>
-    <ul>
-      @for (guess of medicalHistoryDiagnosisGuesses(); track $index) {
-      <li>{{ guess }}</li>
-      }
-    </ul>
-
-    <h3>Untersuchung Diagnoses</h3>
-    <ul>
-      @for (guess of examinationDiagnosisGuesses(); track $index) {
-      <li>{{ guess }}</li>
-      }
-    </ul>
-
-    <h3>Labordiagnostik Diagnoses</h3>
-    <ul>
-      @for (guess of laboratoryDiagnosisGuesses(); track $index) {
-      <li>{{ guess }}</li>
-      }
-    </ul>
-
-    <h3>Weitere Diagnostik Diagnoses</h3>
-    <ul>
-      @for (guess of followUpDiagnosisGuesses(); track $index) {
-      <li>{{ guess }}</li>
-      }
-    </ul>
-  </div>
-
-  <!-- Final Diagnoses / Therapy -->
-  <div>
-    <h3 class="final-heading">Finale Diagnose & Antibiotische Therapie</h3>
-    <ul>
-      <!-- if your final therapy is also in followUpDiagnosisGuesses, or separate, you can adjust -->
-      @for (guess of followUpDiagnosisGuesses(); track $index) {
-      <li>{{ guess }}</li>
-      }
-    </ul>
-  </div>
 </div>
