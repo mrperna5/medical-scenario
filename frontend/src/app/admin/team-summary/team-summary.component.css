@@ -1,0 +1,61 @@
+/* Heading Styles */
+h2 {
+  text-align: center;
+  color: #008db8;
+  font-size: 28px;
+  margin-bottom: 20px;
+  align-items: center;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Button Grid */
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Create 2 equal columns */
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  gap: 1rem; /* Add spacing between buttons */
+  max-width: 300px; /* Limit the grid width */
+  margin: 20px auto; /* Center the grid horizontally and vertically */
+  text-align: center;
+  align-items: center;    /* vertically center each button in its cell */
+  justify-items: center;  /* (optional) horizontally center too */
+}
+
+
+.admin-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+
+.admin-button-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 200px);
+  grid-gap: 30px;
+  margin-top: 40px;
+}
+
+.admin-button {
+  background-color: #008db8;
+  color: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  padding: 20px;
+  font-size: 18px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.admin-button:hover {
+  background-color: #00a3d1;
+}
+
+.p-dialog .p-dialog-header,
+.p-dialog .p-dialog-title,
+.p-button-primary, p, label  {
+  font-family: "Helvetica Neue", Arial, sans-serif !important;
+}

@@ -1,0 +1,52 @@
+@if (roundName() !== 'follow-up') {
+  <h2 class="title">
+    Geben Sie nach Ihrer Anamnese die 5 wahrscheinlichsten Arbeitsdiagnosen an:<br>
+    (geordnet nach ihrer Wahrscheinlichkeit)
+  </h2>
+} @else {
+  <h2 class="title">
+    Zusammenfassung
+  </h2>
+}
+
+<form (ngSubmit)="onSubmit()">
+  @if (roundName() === 'follow-up') {
+    <div class="diagnosis">
+      <label for="diagnosis-1">Ihre finale Diagnose</label>
+      <input
+        id="diagnosis-1"
+        type="text"
+        [(ngModel)]="guesses()[0]"
+        name="guess-1"
+        [disabled]="isLocked"
+      />
+    </div>
+    <div class="diagnosis">
+      <label for="diagnosis-2">Ihre Therapie</label>
+      <input
+        id="diagnosis-2"
+        type="text"
+        [(ngModel)]="guesses()[1]"
+        name="guess-2"
+        [disabled]="isLocked"
+      />
+    </div>
+  } @else {
+    @for (guess of guesses(); track $index) {
+      <div class="diagnosis">
+        <label for="diagnosis-{{ $index }}">Diagnose {{ $index + 1 }}</label>
+        <input
+          id="diagnosis-{{ $index }}"
+          type="text"
+          [(ngModel)]="guesses()[$index]"
+          name="guess-{{ $index }}"
+          [disabled]="isLocked"
+        />
+      </div>
+    }
+  }
+
+  <button type="submit" class="submit-button">
+    Abgeben
+  </button>
+</form>

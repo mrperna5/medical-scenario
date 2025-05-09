@@ -1,0 +1,33 @@
+<h2>And the winner is...</h2>
+
+<p-table [value]="selectedSummaries()" class="custom-summary-table">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Fallnummer</th>
+      <th>Team</th>
+      <th>Mitglieder</th>
+      <th>Diagnose</th>
+      <th>Therapie</th>
+      <th>Kosten</th>
+      <th>Arztzeit</th>
+      <th>Patientenzeit</th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-summary>
+    <tr>
+      <td>{{ summary.scenarioId }}</td>
+      <td>{{ summary.teamName }}</td>
+      <td>{{ summary.teamMembers.join(', ') }}</td>
+      <td>{{ summary.finalDiagnosis }}</td>
+      <td>{{ summary.finalTherapy }}</td>
+      <td>{{ summary.totalCost | currency:'EUR':'symbol':'1.2-2' }}</td>
+      <td>{{ summary.totalDoctorTime }} min</td>
+      <td>{{ summary.totalPatientTime }} min</td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<button routerLink="/admin/team-summary" class="submit-button" style="margin-top: 2rem;">
+  Zurück
+</button>

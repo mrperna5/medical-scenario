@@ -1,0 +1,22 @@
+h2 {
+  color: #008db8;
+}
+
+.diagnosis {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+.diagnosis label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 18px;
+  color: #333;
+}
+
+.diagnosis input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}

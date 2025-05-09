@@ -1,0 +1,31 @@
+<h2 class="title">{{ title() }}</h2>
+
+@if (selectedItems().length > 0) {
+<div>
+  <table class="results-table">
+    <thead>
+      <tr>
+        <th>Auswahl</th>
+        <th>Beschreibung</th>
+      </tr>
+    </thead>
+    <tbody>
+    @for (item of selectedItems(); track item.code) {
+      <tr>
+        <td>{{ item.item }}</td>
+        <td>
+          @if ( item.results && item.results.length > 0) {
+          <ul>
+            @for (result of item.results; track $index) {
+            <li>{{ result }}</li>
+            }
+          </ul>
+        }
+        </td>
+      </tr>
+    }
+    </tbody>
+  </table>
+</div>
+}
+<button [routerLink]="navigateTo()" class="submit-button">Weiter zur Diagnose</button>

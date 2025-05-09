@@ -1,0 +1,241 @@
+/* ------------------------- */
+/*  Introduction Styling */
+/* ------------------------- */
+.introduction-container {
+  margin: 40px auto;
+  padding: 30px;
+  max-width: 900px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+}
+
+.introduction-container h2 {
+  text-align: center;
+  color: #2c3e50;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.introduction-container h3 {
+  color: #34495e;
+  font-size: 22px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #bdc3c7;
+  padding-bottom: 5px;
+}
+
+/* ------------------------- */
+/*  Title Styling */
+/* ------------------------- */
+.title {
+  text-align: center;
+  font-size: 24px;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* ------------------------- */
+/*  Form Styling */
+/* ------------------------- */
+form {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ------------------------- */
+/*  Results Table Styling */
+/* ------------------------- */
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px auto;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  max-width: 800px;
+}
+
+.results-table th,
+.results-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.results-table th {
+  background-color: #008db8;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 14px;
+}
+
+.results-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.results-table tr:hover {
+  background-color: #ddd;
+}
+
+/* ------------------------- */
+/* Totals (shared styling) */
+/* ------------------------- */
+.totals {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #e0f7fa;
+  border-radius: 5px;
+  font-weight: bold;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.total-item {
+  flex: 1;
+  text-align: center;
+}
+
+.totals h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.totals span {
+  font-weight: bold;
+  color: #00796b;
+}
+
+
+
+/* ------------------------- */
+/* Button Styling */
+/* ------------------------- */
+.submit-button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #008db8;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  text-align: center;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #00a3d1;
+}
+
+.delete-button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #b80006;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  text-align: center;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+  background-color: #d10000;
+}
+
+
+
+/* Apply global styles to override PrimeNG defaults */
+.custom-summary-table .p-datatable {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Helvetica Neue', sans-serif;
+  background-color: #fff;
+}
+
+/* Header */
+.custom-summary-table .p-datatable-thead > tr > th {
+  background-color: #008db8;
+  color: white;
+  font-weight: bold;
+  padding: 15px 20px;
+  text-align: center;
+  border: none;
+}
+
+/* Body */
+.custom-summary-table .p-datatable-tbody > tr > td {
+  padding: 15px 20px;
+  text-align: center;
+  font-size: 0.95em;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Hover effect */
+.custom-summary-table .p-datatable-tbody > tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Remove last row's bottom border */
+.custom-summary-table .p-datatable-tbody > tr:last-child > td {
+  border-bottom: none;
+}
+
+.p-paginator {
+  justify-content: center;
+  margin-top: 1rem;
+  gap: 12px;
+  font-size: 1rem;
+}
+
+/* Space out the page number buttons */
+.p-paginator-pages .p-paginator-page {
+  margin: 0 6px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+/* Hover effect */
+.p-paginator .p-paginator-pages .p-paginator-page:not(.p-highlight):hover {
+  background-color: #e0f7fa;
+  color: #007b8a;
+}
+
+/* Active (highlighted) page */
+.p-paginator .p-paginator-page.p-highlight {
+  background-color: #008db8 !important;
+  color: white !important;
+  font-weight: bold;
+}
+
+
+.p-button-primary,
+.p-dialog-header,
+.p-dialog-titlebar,
+.p-dialog-header .p-dialog-title,
+.p-dialog-titlebar .p-dialog-title {
+  font-family: "Helvetica Neue", Arial, sans-serif !important;
+}
+
+.p-dialog-header .p-dialog-title,
+.p-dialog-titlebar .p-dialog-title {  /* target the actual title element */
+  font-family: "Helvetica Neue", Arial, sans-serif !important;
+}

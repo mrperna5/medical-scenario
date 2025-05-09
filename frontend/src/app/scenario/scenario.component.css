@@ -1,0 +1,41 @@
+h3 {
+  color: #008db8;
+}
+
+.scenario-rules ul {
+    padding: 0;
+    margin-left: 20px;
+    list-style-type: disc;
+}
+
+.scenario-rules ul ul {
+    list-style-type: circle;
+    margin-left: 20px;
+}
+
+.patient-scenario p, .further-development p {
+    text-align: justify;
+    margin-bottom: 15px;
+    color: #7f8c8d;
+    font-size: 16px;
+}
+
+.start-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #008db8;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  margin: 20px auto;
+  display: block;
+}
+
+.start-button:hover {
+  background-color: #04b2e7;
+}

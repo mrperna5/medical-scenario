@@ -1,0 +1,27 @@
+<form class="selection-form">
+  <h3 class="title">{{ title() }}</h3>
+
+  <div class="grid-container">
+    @for (item of items(); track item.code) {
+    <div class="grid-item">
+      <label>
+        <input
+          type="checkbox"
+          [disabled]="isLocked"
+          [checked]="selectedItemsMap[item.code]"
+          (change)="onSelectionChange(item, $event)"
+        />
+        {{ item.code }} {{ item.item }}
+      </label>
+    </div>
+    }
+  </div>
+
+  <button
+    type="button"
+    class="submit-button"
+    (click)="onSubmit()"
+  >
+  {{ isLocked ? "Weiter" : "Abgeben" }}
+  </button>
+</form>

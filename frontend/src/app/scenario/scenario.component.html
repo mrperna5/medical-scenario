@@ -1,0 +1,24 @@
+<div class="introduction-container">
+<!--  <h2>Einführung zum medizinischen Fall {{ scenarioNumber }}</h2>-->
+
+  @if (patientScenario) {
+  <section class="patient-scenario">
+    <h3>Patientenfall</h3>
+    <p [innerHTML]="patientScenario.mysteryCase"></p>
+  </section>
+  }
+  <!-- @if (patientScenario?.developments) {
+  <section class="further-development">
+    @for (development of patientScenario.developments; track $index) {
+    <div>
+      <h3>{{ development.stage }}</h3>
+       <h3></h3>
+      <p>{{ development.description }}</p>
+    </div>
+    }
+  </section>
+  } -->
+  <button class="start-button" (click)="startScenario()">
+    Starten Sie den Fall
+  </button>
+</div>

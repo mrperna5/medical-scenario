@@ -1,0 +1,70 @@
+/* Header styles */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  background-color: white;
+  height: 60px;
+}
+
+.pic-left {
+  height: 50px;
+}
+
+.pic-right {
+  height: 50px;
+}
+
+/* Main content styles */
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  background-color: #008db8;
+}
+
+.main-box {
+  color: white;
+  text-align: center;
+}
+
+.main-box p {
+  font-size: 36px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Semester bar styles */
+.semester-bar {
+  background-color: #d43f19;
+  color: white;
+  padding: 5px 0;
+  width: 100%;
+  margin: 20px auto;
+}
+
+.semester-bar p {
+  font-size: 24px;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  padding-left: 20px;
+  margin: 20px auto;
+}
+
+/* Header styles */
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  background-color: white;
+  height: 60px;
+}
+
+
+.p-dialog .p-dialog-header,
+.p-dialog .p-dialog-title,
+.p-button-primary, p, label  {
+  font-family: "Helvetica Neue", Arial, sans-serif !important;
+}

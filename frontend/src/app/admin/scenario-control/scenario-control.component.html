@@ -1,0 +1,25 @@
+<div class="admin-container">
+    <h2>Fallfreigabe</h2>
+    <div class="grid">
+      @for (scenario of sortedScenarioStates; track scenario.id) {
+        <label
+          class="scenario-button"
+          [class.unlocked]="scenario.unlocked"
+          [class.locked]="!scenario.unlocked"
+        >
+          <input
+            type="checkbox"
+            [checked]="scenario.unlocked"
+            (change)="toggleUnlock(scenario.id, scenario.unlocked)"
+            hidden
+          />
+          {{ scenarioLabels[scenario.id - 1] || 'Fall ' + scenario.id }}
+        </label>
+      }
+    </div>
+  </div>
+
+
+<button routerLink="/admin" class="submit-button" style="margin-top: 2rem;">
+  OK
+</button>

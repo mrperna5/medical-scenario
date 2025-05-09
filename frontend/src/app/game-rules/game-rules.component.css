@@ -1,0 +1,37 @@
+h3 {
+  color: #008db8;
+}
+
+.scenario-rules ul {
+    padding: 0;
+    margin-left: 20px;
+    list-style-type: disc;
+}
+
+.scenario-rules ul ul {
+    list-style-type: circle;
+    margin-left: 20px;
+}
+
+.qr-codes-container {
+  display: flex; /* Arrange items side by side */
+  justify-content: center; /* Center items horizontally */
+  gap: 200px; /* Add space between QR codes */
+  margin: 20px 0; /* Add vertical spacing */
+}
+
+.qr-code-item {
+  text-align: center; /* Center the image and label horizontally */
+}
+
+.qr_code {
+  width: 150px; /* Adjust image size */
+  height: 150px;
+  object-fit: contain; /* Ensure image scales properly */
+  margin-bottom: 10px; /* Add spacing between image and label */
+}
+
+.qr-label {
+  font-size: 14px; /* Adjust label font size */
+  color: #333; /* Set label color */
+}

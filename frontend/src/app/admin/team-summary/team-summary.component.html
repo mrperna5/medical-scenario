@@ -1,0 +1,141 @@
+<h2>Datenbank</h2>
+
+<p-table
+  [value]="summaries()"
+  [(selection)]="selectedSummaries"
+  [columns]="cols"
+  exportFilename="team-export"
+  selectionMode="multiple"
+  dataKey="teamName"
+  [paginator]="true"
+  [rows]="10"
+  sortMode="multiple"
+  class="custom-summary-table"
+  #dt
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 3em">
+        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+      </th>
+      <th pSortableColumn="completedDateTime">
+        Datum
+        <p-sortIcon field="completedDateTime"></p-sortIcon>
+      </th>
+      <th pSortableColumn="scenarioId">
+        Fall
+        <p-sortIcon field="scenarioId"></p-sortIcon>
+      </th>
+      <th pSortableColumn="teamName">
+        Team
+        <p-sortIcon field="teamName"></p-sortIcon>
+      </th>
+      <th>Mitglieder</th>
+      <th pSortableColumn="finalDiagnosis">
+        Diagnose
+        <p-sortIcon field="finalDiagnosis"></p-sortIcon>
+      </th>
+      <th pSortableColumn="finalTherapy">
+        Therapie
+        <p-sortIcon field="finalTherapy"></p-sortIcon>
+      </th>
+      <th pSortableColumn="totalCost">
+        Kosten
+        <p-sortIcon field="totalCost"></p-sortIcon>
+      </th>
+      <th pSortableColumn="totalDoctorTime">
+        Arztzeit
+        <p-sortIcon field="totalDoctorTime"></p-sortIcon>
+      </th>
+      <th pSortableColumn="totalPatientTime">
+        Patientenzeit
+        <p-sortIcon field="totalPatientTime"></p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-summary>
+    <tr [pSelectableRow]="summary">
+      <td>
+        <p-tableCheckbox [value]="summary"></p-tableCheckbox>
+      </td>
+      <td>{{ summary.completedDateTime | date:'dd.MM.yyyy' }}</td>
+      <td>{{ summary.scenarioId }}</td>
+      <td>{{ summary.teamName }}</td>
+      <td>{{ summary.teamMembers.join(', ') }}</td>
+      <td>{{ summary.finalDiagnosis }}</td>
+      <td>{{ summary.finalTherapy }}</td>
+      <td>{{ summary.totalCost | currency:'EUR':'symbol':'1.2-2' }}</td>
+      <td>{{ summary.totalDoctorTime }} min</td>
+      <td>{{ summary.totalPatientTime }} min</td>
+    </tr>
+  </ng-template>
+</p-table>
+<div class="admin-container">
+  <div class="admin-button-grid">
+    <button
+      pButton
+      type="button"
+      label="Exportieren"
+      class="admin-button"
+      (click)="dt.exportCSV({ selectionOnly: true })"
+    ></button>
+
+    <button
+      class="admin-button"
+      [disabled]="selectedSummaries().length === 0"
+      (click)="goToSelected()"
+    >
+      Auswahl anzeigen
+    </button>
+
+    <button
+      class="admin-button"
+      [disabled]="selectedSummaries().length === 0"
+      (click)="promptDeletePassword()"
+    >
+      Löschen
+    </button>
+
+    <button
+      class="admin-button"
+      routerLink="/admin"
+    >
+      Zurück
+    </button>
+  </div>
+</div>
+
+
+<p-dialog
+  header="Passwort bestätigen"
+  [(visible)]="passwordDialogVisible"
+  [modal]="true"
+  [closable]="true"
+  [style]="{ width: '300px' }"
+>
+  <div style="display: flex; flex-direction: column; gap: 1rem;">
+    <label for="delete-password">Passwort:</label>
+    <input
+      id="delete-password"
+      type="password"
+      pInputText
+      [ngModel]="passwordInput()"
+      (ngModelChange)="passwordInput.set($event)"
+      (keyup.enter)="verifyDeletePassword()"
+    />
+
+    @if (errorMessage()) {
+      <p style="color: red; margin: 0;">
+        {{ errorMessage() }}
+      </p>
+    }
+
+    <button
+      pButton
+      label="Löschen"
+      (click)="verifyDeletePassword()"
+      style="background-color: darkred; border: red; font-family: Helvetica Neue, Arial, sans-serif"
+    ></button>
+  </div>
+</p-dialog>

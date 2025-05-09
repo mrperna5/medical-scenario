@@ -1,0 +1,9 @@
+/* Heading Styles */
+h2 {
+  text-align: center;
+  color: #008db8;
+  font-size: 28px;
+  margin-bottom: 20px;
+  align-items: center;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}

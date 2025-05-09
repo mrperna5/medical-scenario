@@ -1,0 +1,96 @@
+/* ------------------------- */
+/*  Summary Container */
+/* ------------------------- */
+.summary-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+.summary-container h2,
+.summary-container h3 {
+  text-align: center;
+  color: #333;
+}
+
+/* ------------------------- */
+/*  Summary Cards */
+/* ------------------------- */
+.summary-card {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* If you want center-aligned cells specifically here */
+.summary-card th {
+  text-align: center;
+}
+
+.summary-card td {
+  text-align: center;
+}
+
+/* ------------------------- */
+/*  Diagnosis / Guess Lists */
+/* ------------------------- */
+.summary-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px auto;
+  width: fit-content;
+  text-align: center;
+}
+
+/* Each guess item */
+.summary-card ul li {
+  background-color: #f1f1f1;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  margin: 10px auto;
+  text-align: center;
+  max-width: 400px;
+}
+
+
+/* ------------------------- */
+/*  Team Section Display  */
+/* ------------------------- */
+.team-card {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  text-align: center;
+}
+
+.team-card h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.team-members-list {
+  list-style: disc;
+  padding-left: 20px;
+  max-width: 400px;
+  margin: 10px auto;
+  color: #333;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+.team-members-list li {
+  margin-bottom: 5px;
+}
+
+.p-dialog .p-dialog-header,
+.p-dialog .p-dialog-title,
+.p-button-primary, p, label  {
+  font-family: "Helvetica Neue", Arial, sans-serif !important;
+}

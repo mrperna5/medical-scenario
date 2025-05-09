@@ -1,0 +1,38 @@
+<!-- <div class="welcome-message">
+  <h3>Willkommen zum medizinischen Diagnosespiel!</h3>
+  <p>
+    Vor dem Start möchten wir Sie bitten, den Namen Ihres Teams einzugeben. Dies
+    hilft uns, Ihre Ergebnisse zu speichern und das Spiel noch spannender zu
+    gestalten!
+  </p>
+</div>
+-->
+
+<div class="container">
+  <button [routerLink]="'/game-rules'" class="header">Einführung</button>
+  <form (ngSubmit)="onSubmit()">
+    <div class="grid">
+      @for (case of cases; track $index) {
+        <button
+          class="scenario-button"
+          type="button"
+          [class.selected]="selectedScenarioId === $index + 1"
+          [disabled]="!isUnlocked($index)"
+          (click)="selectScenario($index + 1)"
+        >
+          {{ case }}
+        </button>
+      }
+    </div>
+    
+    @if (selectedScenarioId) {
+    <button
+      type="submit"
+      class="submit-button"
+      [disabled]="!selectedScenarioId"
+    >
+      Weiter
+    </button>
+    }
+  </form>
+</div>
